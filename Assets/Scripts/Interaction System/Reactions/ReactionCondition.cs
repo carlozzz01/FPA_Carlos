@@ -1,16 +1,13 @@
 using UnityEngine;
+using Managers;
 
-public class ReactionCondition : MonoBehaviour
+public class ReactionCondition : Reaction
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private string _conditionID;
+    [SerializeField] private bool _value;
 
-    // Update is called once per frame
-    void Update()
+    protected override void React()
     {
-        
+        DataManager.Instance.Data.GetCondition(_conditionID).SetState(_value);
     }
 }

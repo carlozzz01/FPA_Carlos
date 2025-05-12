@@ -5161,7 +5161,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _description: 
-  _reactionDelay: 0
+  _waitBeforeReaction: 0
+  _waitAfterReaction: 0
   _audioSource: {fileID: 0}
   _shouldSoundLoop: 0
   _audioClip: {fileID: 0}
@@ -49226,7 +49227,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -57146,8 +57147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d400d3b044ec83448da61f5a3d5a5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _positiveReactions: {fileID: 0}
   _defaultReactions: {fileID: 0}
+  _conditions: []
   _collider: {fileID: 1787333425}
+  _handle: {fileID: 0}
 --- !u!1001 &1800808245
 PrefabInstance:
   m_ObjectHideFlags: 0

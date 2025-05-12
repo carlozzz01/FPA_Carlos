@@ -8,7 +8,10 @@ public class Reaction : MonoBehaviour
     [SerializeField] private string _description;
 
     [Header("Configuration")]
-    [SerializeField] private float _reactionDelay;
+    [SerializeField] private float _waitBeforeReaction;
+    [SerializeField] private float _waitAfterReaction;
+
+    protected float _delayTimer;
 
     private Interactable _interactable;
 
@@ -22,18 +25,34 @@ public class Reaction : MonoBehaviour
         _interactable.NextReaction();
     }
 
-    protected virtual IEnumerator DelayPostReaction()
+    protected virtual IEnumerator PerformReactionInTime()
     {
-        yield return new WaitForSeconds(_reactionDelay);
+        _delayTimer = _waitBeforeReaction;
+
+        while (_delayTimer > 0)
+        {
+            yield return new WaitForEndOfFrame();
+
+            _delayTimer -= Time.deltaTime;
+        }
+
+        _delayTimer = _waitAfterReaction;
+
+        React();
+
+        while (_delayTimer > 0)
+        {
+            yield return new WaitForEndOfFrame();
+
+            _delayTimer -= Time.deltaTime;
+        }
 
         PostReact();
     }
 
     public void ExecuteReaction()
     {
-        React();
-
-        StartCoroutine(DelayPostReaction());
+        StartCoroutine(PerformReactionInTime());
     }
 
     public void SetInteractable(Interactable interactable)

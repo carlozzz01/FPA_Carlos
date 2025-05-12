@@ -1,17 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
     [Header("Configuration")]
     // [SerializeField] private bool _interactOnEnter;
-    // [SerializeField] private ReactionContainer _positiveReactions;
+    [SerializeField] private ReactionContainer _positiveReactions;
     [SerializeField] private ReactionContainer _defaultReactions;
+
+    [Header("Conditions")]
+    [SerializeField] private string[] _conditions;
+
 
     [Header("Components")]
     [SerializeField] private Collider _collider;
+    [SerializeField] private Transform _handle;
 
     private bool _isReacting;
     private Queue<Reaction> _reactions = new Queue<Reaction>();
@@ -26,23 +32,45 @@ public class Interactable : MonoBehaviour
         _collider.isTrigger = true;
     }
 
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         if (_interactOnEnter && !_isReacting) Interact();
-    //     }
-    // }
-
+    /// <summary>
+    /// Plays the chain of reactions of this Interactable
+    /// </summary>
     public void Interact()
     {
-        if (_isReacting) return;
+        if (!_isReacting)
+        {
+            // Debug.Log("Interact");
 
-        _isReacting = true;
+            _isReacting = true;
 
-        QueueReactions(_defaultReactions);
+            if (_handle != null)
+            {
+                // TODO: invoke event
+                // interactor.StartIKAnimation(_handle);
+            }
 
-        NextReaction();
+            bool conditionsMet = true;
+
+            foreach (string conditionID in _conditions)
+            {
+                if (!DataManager.Instance.IsConditionMet(conditionID))
+                {
+                    conditionsMet = false;
+                    break;
+                }
+            }
+
+            if (conditionsMet && _conditions.Length > 0)
+            {
+                QueueReactions(_positiveReactions);
+            }
+            else
+            {
+                QueueReactions(_defaultReactions);
+            }
+
+            NextReaction();
+        }
     }
 
     private void QueueReactions(ReactionContainer reactionContainer)

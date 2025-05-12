@@ -15,6 +15,9 @@ namespace Managers
 
         private static DataManager _instance;
         public static DataManager Instance => _instance;
+        
+        public Data Data => _data;
+
         #endregion
 
         #region Unity Events
@@ -23,20 +26,16 @@ namespace Managers
             if (_instance == null)
             {
                 _instance = this;
+
                 DontDestroyOnLoad(gameObject);
+
+                _dataPath = GetDataPath();
             }
             else
             {
                 Destroy(gameObject);
             }
 
-            _dataPath = GetDataPath();
-
-            // LoadSettingsData();
-        }
-
-        private void Start()
-        {
         }
         #endregion
 
@@ -47,8 +46,6 @@ namespace Managers
         [ContextMenu("Save file")]
         public void SaveGameData()
         {
-            _dataPath = GetDataPath();
-
             BinaryFormatter binaryFormatter = new BinaryFormatter();
 
             FileStream file = File.Create(_dataPath);
@@ -66,8 +63,6 @@ namespace Managers
         [ContextMenu("Load save file")]
         public void LoadGameData()
         {
-            _dataPath = GetDataPath();
-
             if (!File.Exists(_dataPath)) return;
 
             BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -85,29 +80,58 @@ namespace Managers
         [ContextMenu("Delete save file")]
         public void DeleteGameData()
         {
-            _dataPath = GetDataPath();
-
             File.Delete(_dataPath);
         }
 
-
+        /// <summary>
+        /// Returns persistent data file path
+        /// </summary>
+        /// <returns></returns>
         private string GetDataPath()
         {
             return $"{Application.persistentDataPath}/{_fileName}";
         }
 
-        // public Stat GetStatistic(string key)
-        // {
-        //     return _data.statistics.FirstOrDefault(stat => stat.key == key);
-        // }
+        /// <summary>
+        /// Returns wether or not the condition with the given ID is met
+        /// </summary>
+        /// <param name="conditionID"></param>
+        /// <returns></returns>
+        public bool IsConditionMet(string conditionID)
+        {
+            Condition condition = _data.GetCondition(conditionID);
 
-        // public Achievement[] GetLockedAchievementsWithStat(Stat statToCheck)
-        // {
-        //     return _data.achievements.Where(achievement => !achievement.isUnlocked && achievement.statKey == statToCheck.key).ToArray();
-        // }
+            if (condition == null)
+            {
+                Debug.LogWarning($"Condition \"{conditionID}\" not found");
+
+                return false;
+            }
+
+            return condition.IsConditionMet;
+        }
 
         /// <summary>
-        /// Saves options data
+        /// Sets the condition with the given ID to the given value
+        /// </summary>
+        /// <param name="conditionID"></param>
+        /// <param name="value"></param>
+        public void SetCondition(string conditionID, bool value)
+        {
+            Condition condition = _data.GetCondition(conditionID);
+
+            if (condition == null)
+            {
+                Debug.LogWarning($"Condition \"{conditionID}\" not found");
+
+                return;
+            }
+
+            condition.SetState(value);
+        }
+
+        /// <summary>
+        /// Saves Player Prefs' options data
         /// </summary>
         public void SaveSettingsPrefs()
         {
@@ -118,22 +142,16 @@ namespace Managers
             PlayerPrefs.Save();
         }
 
+        /// <summary>
+        /// Saves Player Prefs with given value under given key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void SavePrefsField(string key, float value)
         {
             PlayerPrefs.SetFloat(key, value);
 
             PlayerPrefs.Save();
-        }
-
-        /// <summary>
-        /// Loads options data
-        /// </summary>
-        public void LoadSettingsData()
-        {
-            // AudioManager.Instance.SetMasterVolume(HasKey("masterVolume") ? GetFloat("masterVolume") : 1);
-            // AudioManager.Instance.SetMusicVolume(HasKey("musicVolume") ? GetFloat("musicVolume") : 1);
-            // AudioManager.Instance.SetEffectsVolume(HasKey("sfxVolume") ? GetFloat("sfxVolume") : 1);
-            // AudioManager.Instance.SetUIVolume(HasKey("uiVolume") ? GetFloat("uiVolume") : 1);
         }
 
         /// <summary>

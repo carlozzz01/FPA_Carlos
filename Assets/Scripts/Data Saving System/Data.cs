@@ -1,8 +1,17 @@
-using System;
+using System.Linq;
+using UnityEngine;
 
-[Serializable]
+[System.Serializable]
 public class Data
 {
-    // public Stat[] statistics;
-    // public Achievement[] achievements;
+    public string currentScene;
+    public string entrancePosition;
+    [SerializeField] private Condition[] _gameConditions;
+
+    public Condition[] GameConditions => _gameConditions;
+
+    public Condition GetCondition(string conditionID)
+    {
+        return _gameConditions.SingleOrDefault(c => c.id == conditionID);
+    }
 }
