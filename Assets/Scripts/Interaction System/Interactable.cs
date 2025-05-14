@@ -39,7 +39,7 @@ public class Interactable : MonoBehaviour
     {
         if (!_isReacting)
         {
-            // Debug.Log("Interact");
+            Debug.Log("Interact");
 
             _isReacting = true;
 
