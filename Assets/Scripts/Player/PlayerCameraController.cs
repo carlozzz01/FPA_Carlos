@@ -35,19 +35,22 @@ public class PlayerCameraController : MonoBehaviour
         _player.OnLookInput -= OnLook;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        Rotate();
+        // Rotate();
     }
 
     private void OnLook(InputAction.CallbackContext context)
     {
-        Vector2 input = context.ReadValue<Vector2>();
+        Vector2 mouseDelta = context.ReadValue<Vector2>();
 
-        _rotationHorizontal = input.x * _xSensitivity * (_invertX ? -1f : 1f);
+        _rotationHorizontal = mouseDelta.x * _xSensitivity * (_invertX ? -1f : 1f) * Time.deltaTime;
 
-        _rotationVertical += input.y * _ySensitivity * (_invertY ? -1f : 1f);
+        _rotationVertical += mouseDelta.y * _ySensitivity * (_invertY ? -1f : 1f) * Time.deltaTime;
+
         _rotationVertical = Mathf.Clamp(_rotationVertical, _yMinAngle, _yMaxAngle);
+
+        Rotate();
     }
 
     private void Rotate()
