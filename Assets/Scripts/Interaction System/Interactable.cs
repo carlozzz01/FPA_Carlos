@@ -22,6 +22,8 @@ public class Interactable : MonoBehaviour
     private bool _isReacting;
     private Queue<Reaction> _reactions = new Queue<Reaction>();
 
+    public Transform Handle => _handle;
+
     private void Awake()
     {
         if (_collider == null) _collider = GetComponent<Collider>();

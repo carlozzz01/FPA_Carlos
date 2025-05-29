@@ -4,6 +4,9 @@ using UnityEngine.Animations.Rigging;
 
 public class PlayerIKController : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Player _player;
+
     [Header("Configuration")]
     [SerializeField] private ChainIKConstraint _rHandIK;
     [SerializeField] private float _ikAnimationTime = 1f;
@@ -12,13 +15,18 @@ public class PlayerIKController : MonoBehaviour
     private float _ikCoroutineTimer;
     private Coroutine _ikAnimationCoroutine;
 
+    private void OnEnable()
+    {
+        _player.OnInteractionStarted += StartIKAnimation;
+    }
+
     /// <summary>
     /// Matches the Right Hand's IK Target to given Transform for a brief period of time
     /// </summary>
     /// <param name="ikTarget"></param>
-    public void StartIKAnimation(Transform ikTarget)
+    public void StartIKAnimation(Interactable interactable)
     {
-        _rHandIKTarget.SetParent(ikTarget);
+        _rHandIKTarget.SetParent(interactable.Handle);
         _rHandIKTarget.localPosition = Vector3.zero;
         _rHandIKTarget.rotation = Quaternion.Euler(Vector3.zero);
 

@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Player _player;
+    [SerializeField] private Image _uiIndicator;
 
     [Header("Configuration")]
     [SerializeField] private LayerMask _whatIsInteractable;
@@ -49,6 +51,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Interact()
     {
+        _player.OnInteractionStarted.Invoke(_currentInteractable);
+
         _currentInteractable.Interact();
     }
 
@@ -56,13 +60,24 @@ public class PlayerInteraction : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(_player.Head.position, _player.Head.position, out hit, _range, _whatIsInteractable) && hit.collider.TryGetComponent(out Interactable interactable))
+        if (Physics.Raycast(_player.Head.position, _player.Head.forward, out hit, _range, _whatIsInteractable) && hit.collider.TryGetComponent(out Interactable interactable))
         {
             Debug.Log("Interactable found");
+
+            if (_currentInteractable == null)
+            {
+                _uiIndicator.gameObject.SetActive(true);
+            }
+
             _currentInteractable = interactable;
         }
         else if (_currentInteractable != null)
         {
+            if (_currentInteractable != null)
+            {
+                _uiIndicator.gameObject.SetActive(false);
+            }
+
             _currentInteractable = null;
         }
     }

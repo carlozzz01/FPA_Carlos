@@ -30,6 +30,8 @@ public class Player : MonoBehaviour, IPlayerActions
     public Action<InputAction.CallbackContext> OnMoveInput;
     public Action<InputAction.CallbackContext> OnSprintInput;
 
+    public Action<Interactable> OnInteractionStarted;
+
     private void Awake()
     {
         if (_collider == null) _collider = GetComponent<CapsuleCollider>();

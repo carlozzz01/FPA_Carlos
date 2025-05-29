@@ -3,7 +3,17 @@ guid: 73ec285731fc52a4ba252d5764237430
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arms
+    second: {fileID: 2100000, guid: 6da59e936498add4497fef70f5ed2ee2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Background
+    second: {fileID: 2100000, guid: ce0aa7d516264cd48bbf6ac1320ffada, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
