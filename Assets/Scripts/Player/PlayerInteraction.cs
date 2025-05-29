@@ -8,13 +8,17 @@ public class PlayerInteraction : MonoBehaviour
     [Header("References")]
     [SerializeField] private Player _player;
     [SerializeField] private Image _uiIndicator;
+    [SerializeField] private Transform _pickableHolder;
 
     [Header("Configuration")]
     [SerializeField] private LayerMask _whatIsInteractable;
     [SerializeField] private float _range;
 
-    [Header("Debug")]
-    [SerializeField] private Interactable _currentInteractable;
+    [SerializeField] public Interactable currentInteractable { get; private set; }
+    [SerializeField] private bool _isHoldingPickable;
+
+    public Transform PickableHolder => _pickableHolder;
+    public bool IsHoldingPickable => _isHoldingPickable;
 
     private void OnDrawGizmos()
     {
@@ -42,7 +46,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (context.started)
         {
-            if (_currentInteractable != null)
+            if (currentInteractable != null)
             {
                 Interact();
             }
@@ -51,34 +55,49 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Interact()
     {
-        _player.OnInteractionStarted.Invoke(_currentInteractable);
+        _player.OnInteractionStarted.Invoke(currentInteractable);
 
-        _currentInteractable.Interact();
+        currentInteractable.Interact(this);
+
+        if (currentInteractable is Pickable)
+        {
+            if (_isHoldingPickable)
+            {
+                currentInteractable = null;
+                _isHoldingPickable = false;
+            }
+            else
+            {
+                _isHoldingPickable = true;
+            }
+        }
     }
 
     private void CheckForInteractable()
     {
+        if (_isHoldingPickable && currentInteractable != null) return;
+
         RaycastHit hit;
 
         if (Physics.Raycast(_player.Head.position, _player.Head.forward, out hit, _range, _whatIsInteractable) && hit.collider.TryGetComponent(out Interactable interactable))
         {
             Debug.Log("Interactable found");
 
-            if (_currentInteractable == null)
+            if (currentInteractable == null)
             {
                 _uiIndicator.gameObject.SetActive(true);
             }
 
-            _currentInteractable = interactable;
+            currentInteractable = interactable;
         }
-        else if (_currentInteractable != null)
+        else if (currentInteractable != null)
         {
-            if (_currentInteractable != null)
+            if (currentInteractable != null)
             {
                 _uiIndicator.gameObject.SetActive(false);
             }
 
-            _currentInteractable = null;
+            currentInteractable = null;
         }
     }
 }

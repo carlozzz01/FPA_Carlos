@@ -13,7 +13,7 @@ public class Reaction : MonoBehaviour
 
     protected float _delayTimer;
 
-    private Interactable _interactable;
+    private ReactiveInteractable _interactable;
 
     protected virtual void React()
     {
@@ -55,7 +55,7 @@ public class Reaction : MonoBehaviour
         StartCoroutine(PerformReactionInTime());
     }
 
-    public void SetInteractable(Interactable interactable)
+    public void SetInteractable(ReactiveInteractable interactable)
     {
         _interactable = interactable;
     }

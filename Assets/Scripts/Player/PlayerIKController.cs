@@ -20,13 +20,33 @@ public class PlayerIKController : MonoBehaviour
         _player.OnInteractionStarted += StartIKAnimation;
     }
 
+    private void OnDisable()
+    {
+        _player.OnInteractionStarted -= StartIKAnimation;
+    }
+
     /// <summary>
     /// Matches the Right Hand's IK Target to given Transform for a brief period of time
     /// </summary>
     /// <param name="ikTarget"></param>
     public void StartIKAnimation(Interactable interactable)
     {
-        _rHandIKTarget.SetParent(interactable.Handle);
+        ReactiveInteractable reactiveInteractable = interactable as ReactiveInteractable;
+
+        // try
+        // {
+        //     reactiveInteractable = interactable as ReactiveInteractable;
+        // }
+        // catch (System.Exception)
+        // {
+        //     return;
+        // }
+
+        if (reactiveInteractable == null) return;
+
+        if (reactiveInteractable.Handle == null || reactiveInteractable.InteractOnTriggerEnter) return;
+
+        _rHandIKTarget.SetParent(reactiveInteractable.Handle);
         _rHandIKTarget.localPosition = Vector3.zero;
         _rHandIKTarget.rotation = Quaternion.Euler(Vector3.zero);
 
@@ -35,14 +55,14 @@ public class PlayerIKController : MonoBehaviour
             StopCoroutine(_ikAnimationCoroutine);
         }
 
-        _ikAnimationCoroutine = StartCoroutine(LerpIKWeight());
+        _ikAnimationCoroutine = StartCoroutine(AnimateIKWeight());
     }
 
     /// <summary>
     /// Coroutine that interpolates the IK's weight following an Animation Curve
     /// </summary>
     /// <returns></returns>
-    private IEnumerator LerpIKWeight()
+    private IEnumerator AnimateIKWeight()
     {
         _ikCoroutineTimer = 0f;
 

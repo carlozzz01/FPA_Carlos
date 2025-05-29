@@ -1,0 +1,47 @@
+using UnityEngine;
+
+public class Pickable : Interactable
+{
+    [Header("Components")]
+    [SerializeField] private Rigidbody _rigidbody;
+
+    [Header("Configuration")]
+    [SerializeField] private float _maxFollowDelta;
+
+    private Transform _holdPosition;
+    private float _initialDamping;
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        _initialDamping = _rigidbody.linearDamping;
+    }
+
+    public override void Interact(PlayerInteraction player)
+    {
+        if (player.IsHoldingPickable && player.currentInteractable == this)
+        {
+            _holdPosition = null;
+
+            _rigidbody.useGravity = true;
+
+            _rigidbody.linearDamping = _initialDamping;
+        }
+        else
+        {
+            _holdPosition = player.PickableHolder;
+
+            _rigidbody.useGravity = false;
+
+            _rigidbody.linearDamping = 1;
+        }
+    }
+
+    private void Update()
+    {
+        if (_holdPosition == null) return;
+
+        _rigidbody.position = Vector3.MoveTowards(_rigidbody.position, _holdPosition.position, _maxFollowDelta);
+    }
+}
