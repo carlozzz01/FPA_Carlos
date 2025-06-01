@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 
-public class ReactiveInteractable : Interactable
+public class Interactable_Reaction : Interactable
 {
     [Header("Configuration")]
     [SerializeField] private bool _interactOnTriggerEnter;
@@ -31,7 +31,7 @@ public class ReactiveInteractable : Interactable
     {
         if (other.CompareTag("Player") && _interactOnTriggerEnter)
         {
-            Interact();
+            Interact(null);
         }
     }
 

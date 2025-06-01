@@ -59,7 +59,7 @@ public class PlayerInteraction : MonoBehaviour
 
         currentInteractable.Interact(this);
 
-        if (currentInteractable is Pickable)
+        if (currentInteractable is Interactable_Rigidbody)
         {
             if (_isHoldingPickable)
             {

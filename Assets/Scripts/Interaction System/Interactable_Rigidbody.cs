@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Pickable : Interactable
+public class Interactable_Rigidbody : Interactable
 {
     [Header("Components")]
     [SerializeField] private Rigidbody _rigidbody;
@@ -34,7 +34,7 @@ public class Pickable : Interactable
 
             _rigidbody.useGravity = false;
 
-            _rigidbody.linearDamping = 1;
+            _rigidbody.linearDamping = 10;
         }
     }
 

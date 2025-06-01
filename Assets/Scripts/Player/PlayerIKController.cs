@@ -31,7 +31,7 @@ public class PlayerIKController : MonoBehaviour
     /// <param name="ikTarget"></param>
     public void StartIKAnimation(Interactable interactable)
     {
-        ReactiveInteractable reactiveInteractable = interactable as ReactiveInteractable;
+        Interactable_Reaction reactiveInteractable = interactable as Interactable_Reaction;
 
         // try
         // {
