@@ -7,6 +7,8 @@ public class Interactable_Rigidbody : Interactable
 
     [Header("Configuration")]
     [SerializeField] private float _maxFollowDelta;
+    [SerializeField] private bool _breakable;
+    [SerializeField] private float _breakVelocity;
 
     private Transform _holdPosition;
     private float _initialDamping;
@@ -16,6 +18,16 @@ public class Interactable_Rigidbody : Interactable
         base.Awake();
 
         _initialDamping = _rigidbody.linearDamping;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(_rigidbody.linearVelocity.y);
+        
+        if (_breakable && Mathf.Abs(_rigidbody.linearVelocity.y) >= _breakVelocity)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public override void Interact(PlayerInteraction player)

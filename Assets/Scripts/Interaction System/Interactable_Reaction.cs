@@ -5,7 +5,6 @@ using UnityEngine;
 public class Interactable_Reaction : Interactable
 {
     [Header("Configuration")]
-    [SerializeField] private bool _interactOnTriggerEnter;
     [SerializeField] private ReactionContainer _positiveReactions;
     [SerializeField] private ReactionContainer _defaultReactions;
 
@@ -14,13 +13,8 @@ public class Interactable_Reaction : Interactable
 
 
     [Header("Components")]
-    [SerializeField] private Transform _handle;
-
     private bool _isReacting;
     private Queue<Reaction> _reactions = new Queue<Reaction>();
-
-    public Transform Handle => _handle;
-    public bool InteractOnTriggerEnter => _interactOnTriggerEnter;
 
     private void Start()
     {

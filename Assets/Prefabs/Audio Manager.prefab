@@ -50,7 +50,10 @@ MonoBehaviour:
   _audioMixer: {fileID: 24100000, guid: 4991a36fae11fa64fb881984b20bc944, type: 2}
   _musicList: []
   _musicAudioSource: {fileID: 8310255076522881600}
-  _sfxList: []
+  _sfxList:
+  - id: coin
+    clip: {fileID: 8300000, guid: bf941b6e9bf72ad4d9033e22921d2ff1, type: 3}
+    volume: 1
   _sfxAudioSource: {fileID: 1725748704161352276}
   _uiList: []
   _uiAudioSource: {fileID: 6117415011445515580}

@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TextContainer : MonoBehaviour
 {
     [Header("Component References")]
+    [SerializeField] private Player _player;
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private TextMeshProUGUI _text;
 
@@ -16,17 +18,22 @@ public class TextContainer : MonoBehaviour
     [SerializeField] private Transform _shownPoint;
 
     private bool _isBuilding;
+    private bool _isShowingText;
+    private Coroutine _buildCoroutine;
+    private string _currentText;
 
     private void OnEnable()
     {
         ReactionText.OnShowText += DisplayText;
         ReactionText.OnHideText += HideText;
+        _player.OnInteractInput += OnInteract;
     }
 
     private void OnDisable()
     {
         ReactionText.OnShowText -= DisplayText;
         ReactionText.OnHideText -= HideText;
+        _player.OnInteractInput -= OnInteract;
     }
 
     private void Start()
@@ -35,9 +42,33 @@ public class TextContainer : MonoBehaviour
         _canvasGroup.alpha = 0;
     }
 
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (_isBuilding)
+            {
+                SkipTextBuild();
+            }
+            else if (_isShowingText)
+            {
+                HideText();
+            }
+        }
+    }
+
     public void DisplayText(TextData data)
     {
         StartCoroutine(DisplayText(1, _shownPoint.position, data.text, data.timeBetweenCharacters));
+    }
+
+    private void SkipTextBuild()
+    {
+        StopCoroutine(_buildCoroutine);
+
+        _isBuilding = false;
+
+        _text.text = _currentText;
     }
 
     private IEnumerator FadeTowards(float goalAlpha, Vector3 goalPosition)
@@ -62,21 +93,29 @@ public class TextContainer : MonoBehaviour
 
     private IEnumerator BuildText(string text, float timeBetweenCharacters)
     {
-        for (int i = 0; i < text.Length; i++)
+        _isBuilding = true;
+
+        _currentText = text;
+
+        for (int i = 0; i < _currentText.Length; i++)
         {
-            _text.text = text.Substring(0, i);
+            _text.text = _currentText.Substring(0, i);
 
             yield return new WaitForSeconds(timeBetweenCharacters);
         }
+
+        _text.text = _currentText;
+
+        _isBuilding = false;
     }
 
     private IEnumerator DisplayText(float goalAlpha, Vector3 goalPosition, string text, float timeBetweenCharacters)
     {
+        _isShowingText = true;
+
         yield return FadeTowards(goalAlpha, goalPosition);
 
-        _isBuilding = true;
-        yield return BuildText(text, timeBetweenCharacters);
-        _isBuilding = false;
+        _buildCoroutine = StartCoroutine(BuildText(text, timeBetweenCharacters));
     }
 
     private IEnumerator HideText(float goalAlpha, Vector3 goalPosition)
@@ -91,12 +130,15 @@ public class TextContainer : MonoBehaviour
         yield return FadeTowards(goalAlpha, goalPosition);
 
         _text.text = "";
+
+        _isShowingText = false;
     }
 
     public void HideText()
     {
-        StartCoroutine(HideText(0, _hiddenPoint.position));
+        if (_isShowingText) StartCoroutine(HideText(0, _hiddenPoint.position));
     }
+
 }
 
 public class TextData

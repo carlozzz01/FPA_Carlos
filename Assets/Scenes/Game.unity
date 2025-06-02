@@ -530,13 +530,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36119256}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.834, y: -0.099, z: -3.788}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 956178170}
-  m_Father: {fileID: 0}
+  - {fileID: 1724341573}
+  m_Father: {fileID: 1552676403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &36119258
 SphereCollider:
@@ -571,7 +572,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ed9afdd6a5f674ca81dcec6f93be93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interactOnTriggerEnter: 0
   _collider: {fileID: 36119258}
+  _handle: {fileID: 1724341573}
   _itemID: key_mould
 --- !u!4 &36473616 stripped
 Transform:
@@ -2013,13 +2016,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212248477}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.14, y: -0.2, z: -6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1485448360}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1552676403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &212248480
 Rigidbody:
@@ -2047,7 +2050,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &212248481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2060,9 +2063,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4311f2971c3c4404aa1f326363b3b9de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interactOnTriggerEnter: 0
   _collider: {fileID: 212248482}
+  _handle: {fileID: 0}
   _rigidbody: {fileID: 212248480}
   _maxFollowDelta: 1
+  _breakable: 1
+  _breakVelocity: 0.01
 --- !u!136 &212248482
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5299,7 +5306,7 @@ MonoBehaviour:
   m_Data:
     m_Root: {fileID: 1879792387}
     m_Tip: {fileID: 1990551517}
-    m_Target: {fileID: 1787333424}
+    m_Target: {fileID: 1812564156}
     m_ChainRotationWeight: 1
     m_TipRotationWeight: 1
     m_MaxIterations: 15
@@ -9273,6 +9280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33ee798c155522469a2eb12350faa8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 832809132}
   _canvasGroup: {fileID: 326993502}
   _text: {fileID: 2091514868}
   _fadeDuration: 1
@@ -55194,6 +55202,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1787333424}
+  - {fileID: 212248479}
+  - {fileID: 36119257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1553684073 stripped
@@ -62392,6 +62402,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8945863970505951198, guid: 73ec285731fc52a4ba252d5764237430, type: 3}
   m_PrefabInstance: {fileID: 640578739}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1724341572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1724341573}
+  m_Layer: 8
+  m_Name: Handle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1724341573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724341572}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 36119257}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1727888567 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2117548814292324571, guid: 73ec285731fc52a4ba252d5764237430, type: 3}
@@ -63098,12 +63139,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a920e98c9a10b4b82a827d1b27be15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 1787333425}
   _interactOnTriggerEnter: 0
+  _collider: {fileID: 1787333425}
+  _handle: {fileID: 1605969362}
   _positiveReactions: {fileID: 0}
   _defaultReactions: {fileID: 1938115860}
   _conditions: []
-  _handle: {fileID: 1605969362}
 --- !u!4 &1795791993 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6960797014065870972, guid: 73ec285731fc52a4ba252d5764237430, type: 3}
@@ -73644,22 +73685,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 554546992539446354, guid: 48cd7253d01d17d45b21a7bccfc317d3, type: 3}
-      propertyPath: _sfxList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 554546992539446354, guid: 48cd7253d01d17d45b21a7bccfc317d3, type: 3}
-      propertyPath: _sfxList.Array.data[0].id
-      value: coin
-      objectReference: {fileID: 0}
-    - target: {fileID: 554546992539446354, guid: 48cd7253d01d17d45b21a7bccfc317d3, type: 3}
-      propertyPath: _sfxList.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: bf941b6e9bf72ad4d9033e22921d2ff1, type: 3}
-    - target: {fileID: 554546992539446354, guid: 48cd7253d01d17d45b21a7bccfc317d3, type: 3}
-      propertyPath: _sfxList.Array.data[0].volume
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2492877587072844339, guid: 48cd7253d01d17d45b21a7bccfc317d3, type: 3}
       propertyPath: m_Name
       value: Audio Manager
@@ -74432,17 +74457,15 @@ SceneRoots:
   - {fileID: 2059913780}
   - {fileID: 1033829226}
   - {fileID: 832809128}
+  - {fileID: 1552676403}
   - {fileID: 1265328647}
   - {fileID: 547512824}
   - {fileID: 610654590}
   - {fileID: 1195764749}
   - {fileID: 130178590}
   - {fileID: 2042236694}
-  - {fileID: 1552676403}
   - {fileID: 261675574}
   - {fileID: 1946040297}
   - {fileID: 418369218}
   - {fileID: 1034840356}
   - {fileID: 1976059822}
-  - {fileID: 212248479}
-  - {fileID: 36119257}

@@ -31,22 +31,9 @@ public class PlayerIKController : MonoBehaviour
     /// <param name="ikTarget"></param>
     public void StartIKAnimation(Interactable interactable)
     {
-        Interactable_Reaction reactiveInteractable = interactable as Interactable_Reaction;
+        if (interactable.Handle == null || interactable.InteractOnTriggerEnter) return;
 
-        // try
-        // {
-        //     reactiveInteractable = interactable as ReactiveInteractable;
-        // }
-        // catch (System.Exception)
-        // {
-        //     return;
-        // }
-
-        if (reactiveInteractable == null) return;
-
-        if (reactiveInteractable.Handle == null || reactiveInteractable.InteractOnTriggerEnter) return;
-
-        _rHandIKTarget.SetParent(reactiveInteractable.Handle);
+        _rHandIKTarget.SetParent(interactable.Handle);
         _rHandIKTarget.localPosition = Vector3.zero;
         _rHandIKTarget.rotation = Quaternion.Euler(Vector3.zero);
 
