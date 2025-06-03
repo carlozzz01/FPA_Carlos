@@ -3,7 +3,217 @@ guid: bb5cface6d5cc1342ab6ca4dde53a9cd
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock01
+    second: {fileID: 2100000, guid: 64be4e5275e8cad4dbdf2c67fac43dd5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock02
+    second: {fileID: 2100000, guid: ba2fd5c5305951b47a03ded9ad3d4273, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock03
+    second: {fileID: 2100000, guid: d454134d79665ff4cb8239edf7302be4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock04
+    second: {fileID: 2100000, guid: 95c256e112ce76544a7527ea39bc705d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock05
+    second: {fileID: 2100000, guid: 94141a44861f21344be6db9643aeb02f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock06
+    second: {fileID: 2100000, guid: c30d5c9a014216e40813fd052ebf810a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock07
+    second: {fileID: 2100000, guid: a1b3c24ea5cbd9540a4feea09312bc8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock08
+    second: {fileID: 2100000, guid: c21e25dedc571f9488266109da12763c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock09
+    second: {fileID: 2100000, guid: 0d28da48a2c43cf4b98b5448a733e217, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock10
+    second: {fileID: 2100000, guid: ea9c993e4cee2b74ba2e3cf86ea08010, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock11
+    second: {fileID: 2100000, guid: 6eec2a928cea7734a90ffadcddbc6590, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock12
+    second: {fileID: 2100000, guid: e45de13de106fd548a3fd2465cbe9fb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock13
+    second: {fileID: 2100000, guid: d2fcf43ad6a25634fbe5a68c85427d67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock14
+    second: {fileID: 2100000, guid: 6db337e71fcae8b439ee7c81bd13c087, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock15
+    second: {fileID: 2100000, guid: 2fa2f25888028be4c98b39854671c6d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock16
+    second: {fileID: 2100000, guid: 7ac442125b70ae74e8cda7fe732d6fe2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock17
+    second: {fileID: 2100000, guid: 7c5f457883e56f44681fa651b258829f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock18
+    second: {fileID: 2100000, guid: 5b0a729435c79474aaaa6abb264b33e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock19
+    second: {fileID: 2100000, guid: f6e5519374e9d6e4681690a3a3437b58, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock20
+    second: {fileID: 2100000, guid: d05596a41dd5fed4a8dc404aa21e64d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock21
+    second: {fileID: 2100000, guid: 1f8688cd0db2f3349a178d06a484cf8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock22
+    second: {fileID: 2100000, guid: 23f8e77a92e86a54eadcf4bc86583144, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock23
+    second: {fileID: 2100000, guid: 71ec22f1609072a49aec98b18ee72db2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock24
+    second: {fileID: 2100000, guid: 4ebcf42687774454883d13bdfbd6be40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock25
+    second: {fileID: 2100000, guid: 376700d4a4f39e84b89ccd8b07b112a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock26
+    second: {fileID: 2100000, guid: 20237513b0e64a44d839b1af0116a0bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock27
+    second: {fileID: 2100000, guid: 08bda868ab44a2040b9e089ae3d6c6bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock28
+    second: {fileID: 2100000, guid: 56b7aa3a0c9920d4eb7532028448e218, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock30
+    second: {fileID: 2100000, guid: b5b1fc078ac8092488af237b3c2f52e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock32
+    second: {fileID: 2100000, guid: da3dedaa06bed394ea17df809345fffa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock33
+    second: {fileID: 2100000, guid: c53341cb6c13ec341b0651f98dcbe040, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock34
+    second: {fileID: 2100000, guid: 828b183c44d3f324a9dd30109c28c7e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock35
+    second: {fileID: 2100000, guid: 29c4c473ff9de3f43acd7cdd19aa6597, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock37
+    second: {fileID: 2100000, guid: a3a68f3ee28b998409acc67486f7e70c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock39
+    second: {fileID: 2100000, guid: 88985d9d61347fd45ae34317eead7df8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock40
+    second: {fileID: 2100000, guid: 4a83b4e6830a17a46bb655eec9be4215, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock41
+    second: {fileID: 2100000, guid: 5a6333bf456231c4394b13563d77f870, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock42
+    second: {fileID: 2100000, guid: 80e75014007686646bca6f517e5d6f1c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock43
+    second: {fileID: 2100000, guid: 5cd2746d831fe4a4484c51e39d128e24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock44
+    second: {fileID: 2100000, guid: 8d1728ee00585b444903ec50c24dc12a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock45
+    second: {fileID: 2100000, guid: 6f8bbe4a8c008184a8177fd4c62d40bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rock46
+    second: {fileID: 2100000, guid: a6246ed6dbed0f44f9a23ae65456c0f2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
