@@ -1,17 +1,25 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interactable_Rigidbody : Interactable
 {
     [Header("Components")]
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private Transform _model;
 
     [Header("Configuration")]
     [SerializeField] private float _maxFollowDelta;
-    [SerializeField] private bool _breakable;
-    [SerializeField] private float _breakVelocity;
+    [SerializeField] private bool _isBreakable;
+    [HideInInspector][SerializeField] private float _breakVelocity;
+    [HideInInspector][SerializeField] private ParticleSystem _breakEffect;
 
     private Transform _holdPosition;
     private float _initialDamping;
+
+    public bool IsBreakable => _isBreakable;
+    public float BreakVelocity => _breakVelocity;
+    public ParticleSystem BreakEffect => _breakEffect;
+    [HideInInspector] public UnityEvent breakEvent;
 
     public override void Awake()
     {
@@ -20,13 +28,21 @@ public class Interactable_Rigidbody : Interactable
         _initialDamping = _rigidbody.linearDamping;
     }
 
+    private void Update()
+    {
+        if (_holdPosition == null) return;
+
+        _rigidbody.position = Vector3.MoveTowards(_rigidbody.position, _holdPosition.position, _maxFollowDelta);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(_rigidbody.linearVelocity.y);
-        
-        if (_breakable && Mathf.Abs(_rigidbody.linearVelocity.y) >= _breakVelocity)
+
+        if (_isBreakable && Mathf.Abs(_rigidbody.linearVelocity.y) >= _breakVelocity)
         {
-            gameObject.SetActive(false);
+            _model.gameObject.SetActive(false);
+            _breakEffect.Play();
         }
     }
 
@@ -44,16 +60,22 @@ public class Interactable_Rigidbody : Interactable
         {
             _holdPosition = player.PickableHolder;
 
+            // to wake rigidbody up
+            _rigidbody.WakeUp();
+
             _rigidbody.useGravity = false;
 
             _rigidbody.linearDamping = 10;
         }
     }
 
-    private void Update()
+    public void SetBreakVelocity(float velocity)
     {
-        if (_holdPosition == null) return;
+        _breakVelocity = velocity;
+    }
 
-        _rigidbody.position = Vector3.MoveTowards(_rigidbody.position, _holdPosition.position, _maxFollowDelta);
+    public void SetBreakEffect(ParticleSystem effect)
+    {
+        _breakEffect = effect;
     }
 }
