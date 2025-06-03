@@ -14,7 +14,7 @@ public class Interactable_Rigidbody : Interactable
     [HideInInspector][SerializeField] private ParticleSystem _breakEffect;
 
     private Transform _holdPosition;
-    private float _initialDamping;
+    // private float _initialDamping;
 
     public bool IsBreakable => _isBreakable;
     public float BreakVelocity => _breakVelocity;
@@ -25,24 +25,41 @@ public class Interactable_Rigidbody : Interactable
     {
         base.Awake();
 
-        _initialDamping = _rigidbody.linearDamping;
+        // _initialDamping = _rigidbody.linearDamping;
     }
 
     private void Update()
     {
         if (_holdPosition == null) return;
 
+        _rigidbody.WakeUp();
+
         _rigidbody.position = Vector3.MoveTowards(_rigidbody.position, _holdPosition.position, _maxFollowDelta);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(_rigidbody.linearVelocity.y);
-
-        if (_isBreakable && Mathf.Abs(_rigidbody.linearVelocity.y) >= _breakVelocity)
+        if (_isBreakable && !collision.transform.CompareTag("Player"))
         {
-            _model.gameObject.SetActive(false);
-            _breakEffect.Play();
+            bool broke = false;
+            if (Mathf.Abs(_rigidbody.linearVelocity.y) >= _breakVelocity)
+            {
+                broke = true;
+            }
+            else if (Mathf.Abs(_rigidbody.linearVelocity.x) >= _breakVelocity)
+            {
+                broke = true;
+            }
+            else if (Mathf.Abs(_rigidbody.linearVelocity.z) >= _breakVelocity)
+            {
+                broke = true;
+            }
+
+            if (broke)
+            {
+                _model.gameObject.SetActive(false);
+                _breakEffect.Play();
+            }
         }
     }
 
@@ -54,7 +71,11 @@ public class Interactable_Rigidbody : Interactable
 
             _rigidbody.useGravity = true;
 
-            _rigidbody.linearDamping = _initialDamping;
+            _rigidbody.WakeUp();
+
+            // _rigidbody.linearDamping = _initialDamping;
+
+            _rigidbody.linearVelocity = Vector3.zero;
         }
         else
         {
@@ -65,7 +86,9 @@ public class Interactable_Rigidbody : Interactable
 
             _rigidbody.useGravity = false;
 
-            _rigidbody.linearDamping = 10;
+            // _rigidbody.linearDamping = 10;
+
+            _rigidbody.linearVelocity = Vector3.zero;
         }
     }
 

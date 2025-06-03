@@ -81,7 +81,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(_player.Head.position, _player.Head.forward, out hit, _range, _whatIsInteractable) && hit.collider.TryGetComponent(out Interactable interactable))
         {
-            Debug.Log("Interactable found");
+            // Debug.Log("Interactable found");
 
             if (currentInteractable == null)
             {
