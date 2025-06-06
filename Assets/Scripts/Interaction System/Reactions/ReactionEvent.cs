@@ -4,10 +4,10 @@ using UnityEngine.Events;
 public class ReactionEvent : Reaction
 {
     [Header("Event Configuration")]
-    public UnityEvent OnInteract;
+    [SerializeField] private UnityEvent _OnInteract;
 
     protected override void React()
     {
-        OnInteract?.Invoke();
+        _OnInteract?.Invoke();
     }
 }

@@ -18,7 +18,7 @@ public class Interactable_Reaction : Interactable
 
     private void Start()
     {
-        _collider.isTrigger = _interactOnTriggerEnter;
+        // _collider.isTrigger = _interactOnTriggerEnter;
     }
 
     private void OnTriggerEnter(Collider other)

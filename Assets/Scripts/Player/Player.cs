@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, IPlayerActions
 
     [Header("State")]
     public bool isGrounded;
-    public PlayerState state;
+    public PlayerState state { get; private set; }
 
     public Action<InputAction.CallbackContext> OnCrouchInput;
     public Action<InputAction.CallbackContext> OnInteractInput;
@@ -31,6 +31,18 @@ public class Player : MonoBehaviour, IPlayerActions
     public Action<InputAction.CallbackContext> OnSprintInput;
 
     public Action<Interactable> OnInteractionStarted;
+
+    private void OnEnable()
+    {
+        ItemInspectorManager.OnInspectStarted += OnInspectStarted;
+        ItemInspectorManager.OnInspectCanceled += OnInspectCanceled;
+    }
+
+    private void OnDisable()
+    {
+        ItemInspectorManager.OnInspectStarted -= OnInspectStarted;
+        ItemInspectorManager.OnInspectCanceled -= OnInspectCanceled;
+    }
 
     private void Awake()
     {
@@ -48,6 +60,8 @@ public class Player : MonoBehaviour, IPlayerActions
 
     public void OnCrouch(InputAction.CallbackContext context)
     {
+        if (state == PlayerState.Inspect) return;
+
         if (state != PlayerState.Sprint)
         {
             if (context.started)
@@ -75,25 +89,40 @@ public class Player : MonoBehaviour, IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        OnInteractInput?.Invoke(context);
+        if (state == PlayerState.Inspect)
+        {
+            if (context.started) ItemInspectorManager.Instance.StopInspect();
+        }
+        else
+        {
+            OnInteractInput?.Invoke(context);
+        }
+
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (state == PlayerState.Inspect) return;
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
+        if (state == PlayerState.Inspect) return;
+
         OnLookInput?.Invoke(context);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (state == PlayerState.Inspect) return;
+
         OnMoveInput?.Invoke(context);
     }
 
     public void OnSprint(InputAction.CallbackContext context)
     {
+        if (state == PlayerState.Inspect) return;
+
         if (state != PlayerState.Crouch)
         {
             if (context.started)
@@ -118,11 +147,22 @@ public class Player : MonoBehaviour, IPlayerActions
 
         OnSprintInput?.Invoke(context);
     }
+
+    private void OnInspectStarted()
+    {
+        state = PlayerState.Inspect;
+    }
+
+    private void OnInspectCanceled()
+    {
+        state = PlayerState.Walk;
+    }
 }
 
 public enum PlayerState
 {
     Walk,
     Crouch,
-    Sprint
+    Sprint,
+    Inspect
 }
