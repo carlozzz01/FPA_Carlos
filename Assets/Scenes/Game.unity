@@ -80855,7 +80855,7 @@ MonoBehaviour:
   _interactOnTriggerEnter: 0
   _collider: {fileID: 5772971625582500706}
   _handle: {fileID: 1544589440}
-  _defaultReactions: {fileID: 0}
+  _defaultReactions: {fileID: 1747969991}
   _reactionContainers: []
 --- !u!1 &5785746320825058257
 GameObject:

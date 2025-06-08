@@ -6,6 +6,7 @@ public class ReactionContainer : MonoBehaviour
     [SerializeField] private ReactionDecision _decision;
     [SerializeField] private Reaction[] _reactions;
     [SerializeField] private bool _oneUseOnly;
+    [SerializeField] private bool _reactOnTriggerEnter; aaa
     private bool _used;
 
     public ReactionDecision Decision => _decision;
@@ -23,6 +24,7 @@ public class ReactionContainer : MonoBehaviour
             }
         }
     }
+    public bool ReactOnTriggerEnter => _reactOnTriggerEnter; aaa
 
     private void OnValidate()
     {

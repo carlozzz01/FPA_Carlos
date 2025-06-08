@@ -4,6 +4,8 @@ Montar nivel:
 
 Programación:
 - Interactuable que reaccione al recibir un item (hoguera que se enciende al recibir carbón)
+- Distintas condiciones cumplibles en un mismo interactuable reactivo ✓
+- Interactuable que reaccione al entrar, usando nuevo sistema, y que compruebe el tag del colisionador
 
 Montaje:
 - Encontrar y montar fuelle con animación ✓
@@ -19,6 +21,7 @@ Sonidos:
 - fuelle funcionando
 - llamas avivando (encender hoguera)
 - metal burbujeando (caldero llenandose)
+- palos chocando (arreglar fuelle)
 
 Flujo del juego:
 - lee nota del principio, pista sobre barril location

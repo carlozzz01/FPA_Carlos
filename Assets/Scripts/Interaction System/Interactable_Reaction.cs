@@ -19,10 +19,30 @@ public class Interactable_Reaction : Interactable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && _interactOnTriggerEnter)
+        // if (other.CompareTag("Player") && _interactOnTriggerEnter)
+        // {
+        //     Interact(null);
+        // }
+
+        bool conditionMet = false;
+
+        foreach (ReactionContainer reactionChain in _reactionContainers)
         {
-            Interact(null);
+            if (reactionChain.ReactOnTriggerEnter && reactionChain.Decision.CheckDecision() && reactionChain.Usable)
+            {
+                aaa
+
+                QueueReactions(reactionChain);
+
+                conditionMet = true;
+
+                break;
+            }
         }
+
+        if (!conditionMet && _defaultReactions.ReactOnTriggerEnter) QueueReactions(_defaultReactions);
+
+        if (conditionMet || _defaultReactions.ReactOnTriggerEnter) NextReaction();
     }
 
     /// <summary>

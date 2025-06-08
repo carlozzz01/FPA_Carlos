@@ -7,12 +7,10 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] protected bool _interactOnTriggerEnter;
     [SerializeField] protected Collider _collider;
     [SerializeField] protected Transform _handle;
 
     public Transform Handle => _handle;
-    public bool InteractOnTriggerEnter => _interactOnTriggerEnter;
 
     public virtual void Awake()
     {
