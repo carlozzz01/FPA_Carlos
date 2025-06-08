@@ -17,7 +17,7 @@ public class Interactable_RigidbodyEditor : Editor
         if (interactable.IsBreakable)
         {
             serializedObject.Update();
-            breakEvent = serializedObject.FindProperty("breakEvent");
+            breakEvent = serializedObject.FindProperty("OnBreak");
 
             // interactable.SetTriggerKey(EditorGUILayout.TextField("Trigger ID", interactable.TriggerKey));
             interactable.SetBreakVelocity(EditorGUILayout.FloatField("Break Velocity", interactable.BreakVelocity));

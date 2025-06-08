@@ -81,6 +81,29 @@ public class PoolManager : MonoBehaviour
         return entity;
     }
 
+    // public void Spawn(SpawnData spawnData)
+    // {
+    //     PoolEntity entity = null;
+
+    //     foreach (Pool pool in _pools)
+    //     {
+    //         if (pool.ID == spawnData.poolID)
+    //         {
+    //             if (!pool.TryPull(out entity))
+    //             {
+    //                 entity = CreatePoolEntity(spawnData.poolID);
+    //             }
+    //         }
+    //     }
+
+    //     if (entity != null)
+    //     {
+    //         entity.transform.position = spawnData.position;
+    //         entity.transform.rotation = spawnData.rotation;
+    //         entity.Initialize();
+    //     }
+    // }
+
     /// <summary>
     /// Initializes all the pools created in the Editor.
     /// </summary>
@@ -118,3 +141,10 @@ public class PoolManager : MonoBehaviour
         return entity;
     }
 }
+
+// public struct SpawnData
+// {
+//     public string poolID;
+//     public Vector3 position;
+//     public Quaternion rotation;
+// }

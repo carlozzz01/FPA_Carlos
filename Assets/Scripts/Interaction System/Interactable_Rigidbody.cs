@@ -19,7 +19,7 @@ public class Interactable_Rigidbody : Interactable
     public bool IsBreakable => _isBreakable;
     public float BreakVelocity => _breakVelocity;
     public ParticleSystem BreakEffect => _breakEffect;
-    [HideInInspector] public UnityEvent breakEvent;
+    [HideInInspector] public UnityEvent OnBreak;
 
     public override void Awake()
     {
@@ -41,7 +41,9 @@ public class Interactable_Rigidbody : Interactable
     {
         if (_isBreakable && !collision.transform.CompareTag("Player"))
         {
+            // Checks collision on all axis, sets boolean to true if velocity is surpasses limit velocity
             bool broke = false;
+
             if (Mathf.Abs(_rigidbody.linearVelocity.y) >= _breakVelocity)
             {
                 broke = true;
@@ -55,10 +57,16 @@ public class Interactable_Rigidbody : Interactable
                 broke = true;
             }
 
+            // If the limit is surpassed, 
             if (broke)
             {
+                // Deactivate the model, play vfx, and call break event
+                
                 _model.gameObject.SetActive(false);
+
                 _breakEffect.Play();
+
+                OnBreak?.Invoke();
             }
         }
     }
@@ -100,5 +108,10 @@ public class Interactable_Rigidbody : Interactable
     public void SetBreakEffect(ParticleSystem effect)
     {
         _breakEffect = effect;
+    }
+
+    public void PullPoolItem(string poolID)
+    {
+        PoolManager.Instance.Pull(poolID, transform.position, transform.rotation);
     }
 }
