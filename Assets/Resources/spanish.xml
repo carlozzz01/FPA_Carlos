@@ -2,5 +2,6 @@
     <lang>
         <string key="test01">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce turpis nunc, aliquam ac tempor sed, vehicula quis risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis dapibus tristique nisl, ac elementum urna varius quis. Nulla et lorem fringilla, sodales nibh ac, tempor nisi.</string>
         <string key="scroll_open">Feliz cumpleaños hijo.</string>
+        <string key="bellows_default">Hmmm... Parece que al fuelle le falta el mango para que funcione.</string>
     </lang>
 </main>

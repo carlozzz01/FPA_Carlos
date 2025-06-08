@@ -1,7 +1,7 @@
 using UnityEngine;
 using Managers;
 
-public class ReactionCondition : Reaction
+public class ReactionSetCondition : Reaction
 {
     [SerializeField] private string _conditionID;
     [SerializeField] private bool _value;

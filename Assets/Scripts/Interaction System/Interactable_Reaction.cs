@@ -5,15 +5,12 @@ using UnityEngine;
 public class Interactable_Reaction : Interactable
 {
     [Header("Configuration")]
-    [SerializeField] private ReactionContainer _positiveReactions;
     [SerializeField] private ReactionContainer _defaultReactions;
-
-    [Header("Conditions")]
-    [SerializeField] private string[] _conditions;
+    [SerializeField] private List<ReactionContainer> _reactionContainers;
 
     [Header("Debug")]
     private bool _isReacting;
-    private Queue<Reaction> _reactions = new Queue<Reaction>();
+    private Queue<Reaction> _reactionQueue = new Queue<Reaction>();
 
     private void Start()
     {
@@ -39,25 +36,21 @@ public class Interactable_Reaction : Interactable
 
             _isReacting = true;
 
-            bool conditionsMet = true;
+            bool conditionMet = false;
 
-            foreach (string conditionID in _conditions)
+            foreach (ReactionContainer reactionChain in _reactionContainers)
             {
-                if (!DataManager.Instance.IsConditionMet(conditionID))
+                if (reactionChain.Decision.CheckDecision() && reactionChain.Usable)
                 {
-                    conditionsMet = false;
+                    QueueReactions(reactionChain);
+
+                    conditionMet = true;
+
                     break;
                 }
             }
 
-            if (conditionsMet && _conditions.Length > 0)
-            {
-                QueueReactions(_positiveReactions);
-            }
-            else
-            {
-                QueueReactions(_defaultReactions);
-            }
+            if (!conditionMet) QueueReactions(_defaultReactions);
 
             NextReaction();
         }
@@ -65,21 +58,21 @@ public class Interactable_Reaction : Interactable
 
     private void QueueReactions(ReactionContainer reactionContainer)
     {
-        _reactions.Clear();
+        _reactionQueue.Clear();
 
         foreach (Reaction reaction in reactionContainer.GetReactions())
         {
             reaction.SetInteractable(this);
 
-            _reactions.Enqueue(reaction);
+            _reactionQueue.Enqueue(reaction);
         }
     }
 
     public void NextReaction()
     {
-        if (_reactions.Count > 0)
+        if (_reactionQueue.Count > 0)
         {
-            _reactions.Dequeue().ExecuteReaction();
+            _reactionQueue.Dequeue().ExecuteReaction();
         }
         else
         {

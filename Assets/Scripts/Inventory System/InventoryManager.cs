@@ -61,9 +61,60 @@ namespace Managers
             return false;
         }
 
+        public bool TryRemoveItemFromInventory(string itemID)
+        {
+            int emptyInventorySlotIndex = -1;
+
+            for (int i = 0; i < _inventory.Length; i++)
+            {
+                if (_inventory[i].ID == itemID)
+                {
+                    emptyInventorySlotIndex = i;
+                    break;
+                }
+            }
+
+            if (emptyInventorySlotIndex < 0)
+            {
+                Debug.LogWarning("Inventory not found");
+
+                return false;
+            }
+
+            if (DataManager.Instance.Data.TryGetItem(itemID, out Item item))
+            {
+                Item newItem = new Item();
+
+                _inventory[emptyInventorySlotIndex] = newItem;
+
+                _ui.UpdateInventory();
+
+                return true;
+            }
+
+            return false;
+        }
+
         public string GetItemID(int index)
         {
             return _inventory[index].ID;
+        }
+
+        public bool IsItemInInventory(string itemID)
+        {
+            bool itemFound = false;
+
+            foreach (Item item in _inventory)
+            {
+                if (item.ID == itemID)
+                {
+                    itemFound = true;
+
+                    break;
+                }
+            }
+
+            return itemFound;
         }
     }
 }

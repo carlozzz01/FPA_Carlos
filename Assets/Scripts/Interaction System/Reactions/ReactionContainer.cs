@@ -3,7 +3,26 @@ using UnityEngine;
 public class ReactionContainer : MonoBehaviour
 {
     [Header("Configuration")]
+    [SerializeField] private ReactionDecision _decision;
     [SerializeField] private Reaction[] _reactions;
+    [SerializeField] private bool _oneUseOnly;
+    private bool _used;
+
+    public ReactionDecision Decision => _decision;
+    public bool Usable
+    {
+        get
+        {
+            if (_oneUseOnly)
+            {
+                return !_used;
+            }
+            else
+            {
+                return true;
+            }
+        }
+    }
 
     private void OnValidate()
     {
@@ -12,6 +31,8 @@ public class ReactionContainer : MonoBehaviour
 
     public Reaction[] GetReactions()
     {
+        if (!_used) _used = true;
+
         return _reactions;
     }
 
