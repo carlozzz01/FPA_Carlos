@@ -11,8 +11,7 @@ public class Interactable_Reaction : Interactable
     [Header("Conditions")]
     [SerializeField] private string[] _conditions;
 
-
-    [Header("Components")]
+    [Header("Debug")]
     private bool _isReacting;
     private Queue<Reaction> _reactions = new Queue<Reaction>();
 

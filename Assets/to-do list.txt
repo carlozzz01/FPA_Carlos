@@ -1,0 +1,35 @@
+Montar nivel:
+- Escribir nota de puerta: pista hacia el barril con carbón
+- Esconder barril de carbón
+
+Programación:
+- Interactuable que reaccione al recibir un item (hoguera que se enciende al recibir carbón)
+
+Montaje:
+- Encontrar y montar fuelle con animación ✓
+- Desactivar mango del fuelle, esconderlo entre lanzas, crear pista donde el carbón (hermanos de cabeza puntiaguda), 
+- guardar mango del fuelle como item, colocarlo en el fuelle
+
+Optimización:
+- Culling de objetos
+
+Sonidos:
+- caja/barril rompiéndose
+- piedra chocando contra suelo (carbon, piedras)
+- fuelle funcionando
+- llamas avivando (encender hoguera)
+- metal burbujeando (caldero llenandose)
+
+Flujo del juego:
+- lee nota del principio, pista sobre barril location
+- consigue carbon, dentro de barril
+- carbon a la hoguera
+- cerca de barril, pista sobre mango de fuelle
+- unir mango a fuelle, usar fuelle, iniciar fuego
+- encontrar caldero (pista: donde?, en el laberinto)
+- colocar caldero
+- llenar caldero de metal
+- encontrar molde (pista dentro de caldero, colgada del tejado)
+- usar molde en caldero
+- tirar molde a cubo de agua (cubo de agua donde???)
+- sacar llave, ganar

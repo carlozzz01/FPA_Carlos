@@ -1,17 +1,34 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
 public class Data
 {
-    [SerializeField] private Condition[] _gameConditions;
+    [SerializeField] private List<Condition> _gameConditions;
     [SerializeField] private Item[] _gameItems;
 
-    public Condition[] GameConditions => _gameConditions;
+    public List<Condition> GameConditions => _gameConditions;
 
     public Condition GetCondition(string conditionID)
     {
         return _gameConditions.SingleOrDefault(c => c.id == conditionID);
+    }
+
+    public bool TrySetCondition(string conditionID, bool value)
+    {
+        int conditionIndex = _gameConditions.FindIndex(c => c.id == conditionID);
+
+        if (conditionIndex > -1)
+        {
+            _gameConditions[conditionIndex].SetState(value);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool TryGetItem(string id, out Item item)

@@ -130,7 +130,8 @@ GameObject:
   - component: {fileID: 8273631394265018336}
   - component: {fileID: 5707509239234185723}
   - component: {fileID: 2901085673703260235}
-  m_Layer: 0
+  - component: {fileID: 7691700569742877}
+  m_Layer: 8
   m_Name: coal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +147,7 @@ Transform:
   m_GameObject: {fileID: 7651928496590275531}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.8672504, y: 0.0011941076, z: -10.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -218,3 +219,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7691700569742877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7651928496590275531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4311f2971c3c4404aa1f326363b3b9de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactOnTriggerEnter: 0
+  _collider: {fileID: 5707509239234185723}
+  _handle: {fileID: 0}
+  _rigidbody: {fileID: 2901085673703260235}
+  _model: {fileID: 4112043382516116058}
+  _maxFollowDelta: 1
+  _isBreakable: 0
+  _breakVelocity: 0
+  _breakEffect: {fileID: 0}
+  OnBreak:
+    m_PersistentCalls:
+      m_Calls: []
