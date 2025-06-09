@@ -31,7 +31,7 @@ public class PlayerIKController : MonoBehaviour
     /// <param name="ikTarget"></param>
     public void StartIKAnimation(Interactable interactable)
     {
-        if (interactable.Handle == null || interactable.InteractOnTriggerEnter) return;
+        if (interactable.Handle == null) return;
 
         _rHandIKTarget.SetParent(interactable.Handle);
         _rHandIKTarget.localPosition = Vector3.zero;

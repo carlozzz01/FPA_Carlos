@@ -19,19 +19,20 @@ public class Interactable_Reaction : Interactable
 
     private void OnTriggerEnter(Collider other)
     {
-        // if (other.CompareTag("Player") && _interactOnTriggerEnter)
-        // {
-        //     Interact(null);
-        // }
+        if (_isReacting) return;
 
         bool conditionMet = false;
+        bool conditionsMet = true;
 
         foreach (ReactionContainer reactionChain in _reactionContainers)
         {
-            if (reactionChain.ReactOnTriggerEnter && reactionChain.Decision.CheckDecision() && reactionChain.Usable)
+            foreach (ReactionDecision item in reactionChain.Decisions)
             {
-                aaa
+                if (!item.CheckDecision()) conditionsMet = false;
+            }
 
+            if (reactionChain.ReactOnTriggerEnter && conditionsMet && reactionChain.Usable)
+            {
                 QueueReactions(reactionChain);
 
                 conditionMet = true;
@@ -56,21 +57,37 @@ public class Interactable_Reaction : Interactable
 
             _isReacting = true;
 
-            bool conditionMet = false;
+            bool reactionAchieved = false;
 
             foreach (ReactionContainer reactionChain in _reactionContainers)
             {
-                if (reactionChain.Decision.CheckDecision() && reactionChain.Usable)
+                bool conditionsMet = true;
+                
+                foreach (ReactionDecision item in reactionChain.Decisions)
+                {
+                    if (item.CheckDecision())
+                    {
+                        // Debug.Log($"Is decision {item.name} met? {conditionsMet}");
+                    }
+                    else
+                    {
+                        conditionsMet = false;
+                    }
+
+                    Debug.Log($"Is decision {item.name} met? {conditionsMet}");
+                }
+
+                if (conditionsMet && reactionChain.Usable)
                 {
                     QueueReactions(reactionChain);
 
-                    conditionMet = true;
+                    reactionAchieved = true;
 
                     break;
                 }
             }
 
-            if (!conditionMet) QueueReactions(_defaultReactions);
+            if (!reactionAchieved) QueueReactions(_defaultReactions);
 
             NextReaction();
         }

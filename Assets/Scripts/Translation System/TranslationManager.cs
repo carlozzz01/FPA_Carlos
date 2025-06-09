@@ -47,7 +47,7 @@ namespace Managers
         private void LoadText(XmlDocument xml)
         {
             _textDictionary = new Dictionary<string, string>();
-    
+
             XmlElement element = xml.DocumentElement["lang"];
     
             IEnumerator elementEnum = element.GetEnumerator();
@@ -55,8 +55,10 @@ namespace Managers
             while (elementEnum.MoveNext())
             {
                 XmlElement xmlItem = (XmlElement)elementEnum.Current;
+
+                string text = xmlItem.InnerText.Replace('[', '<').Replace(']', '>');
     
-                _textDictionary.Add(xmlItem.GetAttribute("key"), xmlItem.InnerText);
+                _textDictionary.Add(xmlItem.GetAttribute("key"), text);
             }
         }
     

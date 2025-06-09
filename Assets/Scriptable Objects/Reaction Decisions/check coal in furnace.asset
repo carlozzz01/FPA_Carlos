@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3a3642484cd7574ba8372174dfbce87, type: 3}
+  m_Name: check coal in furnace
+  m_EditorClassIdentifier: 
+  _checkPoint: {x: 5.962, y: 0.08399999, z: 0.864}
+  _checkRadius: 0.75
+  _checkLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  _itemID: coal
+  _amountNeeded: 1

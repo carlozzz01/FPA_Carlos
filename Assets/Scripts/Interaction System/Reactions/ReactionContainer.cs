@@ -3,13 +3,15 @@ using UnityEngine;
 public class ReactionContainer : MonoBehaviour
 {
     [Header("Configuration")]
-    [SerializeField] private ReactionDecision _decision;
+    // [SerializeField] private ReactionDecision _decision;
+    [SerializeField] private ReactionDecision[] _decisions;
     [SerializeField] private Reaction[] _reactions;
     [SerializeField] private bool _oneUseOnly;
-    [SerializeField] private bool _reactOnTriggerEnter; aaa
+    [SerializeField] private bool _reactOnTriggerEnter;
     private bool _used;
 
-    public ReactionDecision Decision => _decision;
+    // public ReactionDecision Decision => _decision;
+    public ReactionDecision[] Decisions => _decisions;
     public bool Usable
     {
         get
@@ -24,7 +26,7 @@ public class ReactionContainer : MonoBehaviour
             }
         }
     }
-    public bool ReactOnTriggerEnter => _reactOnTriggerEnter; aaa
+    public bool ReactOnTriggerEnter => _reactOnTriggerEnter;
 
     private void OnValidate()
     {
