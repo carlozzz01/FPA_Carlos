@@ -6,6 +6,6 @@ public class ReactionInspect : Reaction
 
     protected override void React()
     {
-        ItemInspectorManager.Instance.ShowItem(_id);
+        InspectorManager.Instance.ShowItem(_id);
     }
 }

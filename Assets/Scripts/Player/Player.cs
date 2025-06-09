@@ -34,14 +34,14 @@ public class Player : MonoBehaviour, IPlayerActions
 
     private void OnEnable()
     {
-        ItemInspectorManager.OnInspectStarted += OnInspectStarted;
-        ItemInspectorManager.OnInspectCanceled += OnInspectCanceled;
+        InspectorManager.OnInspectStarted += OnInspectStarted;
+        InspectorManager.OnInspectCanceled += OnInspectCanceled;
     }
 
     private void OnDisable()
     {
-        ItemInspectorManager.OnInspectStarted -= OnInspectStarted;
-        ItemInspectorManager.OnInspectCanceled -= OnInspectCanceled;
+        InspectorManager.OnInspectStarted -= OnInspectStarted;
+        InspectorManager.OnInspectCanceled -= OnInspectCanceled;
     }
 
     private void Awake()
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour, IPlayerActions
     {
         if (state == PlayerState.Inspect)
         {
-            if (context.started) ItemInspectorManager.Instance.StopInspect();
+            if (context.started) InspectorManager.Instance.StopInspect();
         }
         else
         {
