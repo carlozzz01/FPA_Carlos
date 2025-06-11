@@ -38,7 +38,7 @@ public class Interactable_Rigidbody : Interactable
         _rigidbody.position = Vector3.MoveTowards(_rigidbody.position, _holdPosition.position, _maxFollowDelta);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (_isBreakable && !collision.transform.CompareTag("Player"))
         {
