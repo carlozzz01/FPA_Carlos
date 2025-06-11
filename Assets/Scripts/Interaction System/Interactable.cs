@@ -28,4 +28,9 @@ public class Interactable : MonoBehaviour
     public virtual void Interact(PlayerInteraction player)
     {
     }
+
+    public void PullPoolItem(string poolID)
+    {
+        PoolManager.Instance.Pull(poolID, transform.position, transform.rotation);
+    }
 }

@@ -20,6 +20,7 @@ public class Interactable_Rigidbody : Interactable
     public float BreakVelocity => _breakVelocity;
     public ParticleSystem BreakEffect => _breakEffect;
     [HideInInspector] public UnityEvent OnBreak;
+    public Rigidbody Rigidbody => _rigidbody;
 
     public override void Awake()
     {
@@ -87,7 +88,7 @@ public class Interactable_Rigidbody : Interactable
         }
         else
         {
-            _holdPosition = player.PickableHolder;
+            _holdPosition = player.RigidbodyHolder;
 
             // to wake rigidbody up
             _rigidbody.WakeUp();
@@ -108,10 +109,5 @@ public class Interactable_Rigidbody : Interactable
     public void SetBreakEffect(ParticleSystem effect)
     {
         _breakEffect = effect;
-    }
-
-    public void PullPoolItem(string poolID)
-    {
-        PoolManager.Instance.Pull(poolID, transform.position, transform.rotation);
     }
 }

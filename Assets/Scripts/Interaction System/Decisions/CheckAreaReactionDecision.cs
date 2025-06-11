@@ -15,6 +15,8 @@ public class CheckAreaReactionDecision : ReactionDecision
 
     public override bool CheckDecision()
     {
+        _hits = new Collider[10];
+
         if (Physics.OverlapSphereNonAlloc(_checkPoint, _checkRadius, _hits, _checkLayers) >= _amountNeeded)
         {
             Debug.Log(_hits.Length);
@@ -23,6 +25,10 @@ public class CheckAreaReactionDecision : ReactionDecision
 
             foreach (Collider hit in _hits)
             {
+                if (hit == null) continue;
+
+                Debug.Log(hit.name);
+
                 if (hit.TryGetComponent(out PoolEntity entity))
                 {
                     if (entity.ID != _itemID)
@@ -46,7 +52,7 @@ public class CheckAreaReactionDecision : ReactionDecision
         }
         else
         {
-            Debug.Log("No sufficient amount found");
+            Debug.Log($"No sufficient amount found: {_hits.Length}");
 
             return false;
         }

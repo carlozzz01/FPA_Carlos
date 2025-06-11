@@ -29,6 +29,7 @@ public class Player : MonoBehaviour, IPlayerActions
     public Action<InputAction.CallbackContext> OnLookInput;
     public Action<InputAction.CallbackContext> OnMoveInput;
     public Action<InputAction.CallbackContext> OnSprintInput;
+    public Action<InputAction.CallbackContext> OnShootInput;
 
     public Action<Interactable> OnInteractionStarted;
 
@@ -146,6 +147,13 @@ public class Player : MonoBehaviour, IPlayerActions
         }
 
         OnSprintInput?.Invoke(context);
+    }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        if (state == PlayerState.Inspect) return;
+
+        OnShootInput?.Invoke(context);
     }
 
     private void OnInspectStarted()

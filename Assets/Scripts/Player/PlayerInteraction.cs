@@ -2,23 +2,30 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.WSA;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Player _player;
     [SerializeField] private Image _uiIndicator;
-    [SerializeField] private Transform _pickableHolder;
+    [SerializeField] private Transform _rigidbodyHolder;
 
     [Header("Configuration")]
     [SerializeField] private LayerMask _whatIsInteractable;
     [SerializeField] private float _range;
-
     [SerializeField] public Interactable currentInteractable { get; private set; }
-    [SerializeField] private bool _isHoldingPickable;
 
-    public Transform PickableHolder => _pickableHolder;
-    public bool IsHoldingPickable => _isHoldingPickable;
+    [Header("Physics")]
+    [SerializeField] private bool _isHoldingRigidboy;
+    [SerializeField] private float _maxLaunchForce = 5f;
+    [SerializeField] private float _launchForceGain = 0.3f;
+    [SerializeField] private float _minimumForceForLaunch = 0.5f;
+    [SerializeField] private bool _isChargingLaunch;
+    [SerializeField] private float _launchForce;
+
+    public Transform RigidbodyHolder => _rigidbodyHolder;
+    public bool IsHoldingPickable => _isHoldingRigidboy;
 
     private void OnDrawGizmos()
     {
@@ -30,16 +37,19 @@ public class PlayerInteraction : MonoBehaviour
     private void OnEnable()
     {
         _player.OnInteractInput += OnInteract;
+        _player.OnShootInput += OnShoot;
     }
 
     private void OnDisable()
     {
         _player.OnInteractInput -= OnInteract;
+        _player.OnShootInput -= OnShoot;
     }
 
     private void FixedUpdate()
     {
         CheckForInteractable();
+        if (_isChargingLaunch) ChargeLaunch();
     }
 
     private void OnInteract(InputAction.CallbackContext context)
@@ -53,6 +63,44 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    private void OnShoot(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            if (_isHoldingRigidboy) StartChargingLaunch();
+        }
+        else if (context.canceled)
+        {
+            if (_isHoldingRigidboy && _launchForce > _minimumForceForLaunch)
+            {
+                Launch();
+            }
+
+            _isChargingLaunch = false;
+            _launchForce = 0;
+        }
+    }
+
+    private void Launch()
+    {
+        currentInteractable.Interact(this);
+
+        Interactable_Rigidbody interactable = currentInteractable as Interactable_Rigidbody;
+
+        interactable.Rigidbody.AddForce(_rigidbodyHolder.forward.normalized * _launchForce, ForceMode.Impulse);
+
+        currentInteractable = null;
+
+        _isHoldingRigidboy = false;
+    }
+
+    private void ChargeLaunch()
+    {
+        _launchForce += Time.deltaTime * _launchForceGain;
+
+        _launchForce = Mathf.Min(_launchForce, _maxLaunchForce);
+    }
+
     private void Interact()
     {
         _player.OnInteractionStarted.Invoke(currentInteractable);
@@ -61,21 +109,21 @@ public class PlayerInteraction : MonoBehaviour
 
         if (currentInteractable is Interactable_Rigidbody)
         {
-            if (_isHoldingPickable)
+            if (_isHoldingRigidboy)
             {
                 currentInteractable = null;
-                _isHoldingPickable = false;
+                _isHoldingRigidboy = false;
             }
             else
             {
-                _isHoldingPickable = true;
+                _isHoldingRigidboy = true;
             }
         }
     }
 
     private void CheckForInteractable()
     {
-        if (_isHoldingPickable && currentInteractable != null) return;
+        if (_isHoldingRigidboy && currentInteractable != null) return;
 
         RaycastHit hit;
 
@@ -99,5 +147,10 @@ public class PlayerInteraction : MonoBehaviour
 
             currentInteractable = null;
         }
+    }
+
+    private void StartChargingLaunch()
+    {
+        _isChargingLaunch = true;
     }
 }

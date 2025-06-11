@@ -1,7 +1,7 @@
 <main>
     <lang>
         <string key="test01">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce turpis nunc, aliquam ac tempor sed, vehicula quis risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis dapibus tristique nisl, ac elementum urna varius quis. Nulla et lorem fringilla, sodales nibh ac, tempor nisi.</string>
-        <string key="scroll_open">A mi hijo,
+        <string key="scroll_open_01">A mi hijo,
 Hoy cumples tus [color=#DAA520FF]dieciséis inviernos[/color]. Has despertado donde debes, bajo el cielo y sobre la tierra fría.
 Como dicta la tradición del hierro y la sangre, hoy debes probar que tienes mano para el oficio. No basta con haber crecido… hay que templarse.
 Si quieres volver a [color=#DAA520FF]cruzar esta puerta[/color], empieza por lo primero:
@@ -13,6 +13,13 @@ Recuerda bien esto, como lo hizo tu abuelo y el padre de su padre:
 [color=#DAA520FF]Vale más la maña que la fuerza.[/color]
 Si no sabes valerte por ti mismo, [color=#800000]no entres.[/color]
 — Tu padre
+        </string>
+        <string key="scroll_open_02">No todo lo útil brilla ni todo lo largo es lanza.
+El mango que buscas no está lejos,
+solo se esconde entre sus hermanas:
+[color=#DAA520FF]alargadas, de madera, y con punta aguda.[/color]
+Mira con atención. Una de ellas no nació para herir,
+sino para dar aliento al fuego.
         </string>
         <string key="bellows_default">Hmmm... Parece que al fuelle le falta el mango para que funcione.</string>
     </lang>

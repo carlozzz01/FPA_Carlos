@@ -113,16 +113,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4311f2971c3c4404aa1f326363b3b9de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactOnTriggerEnter: 0
   _collider: {fileID: 1799923929347268549}
   _handle: {fileID: 0}
   _rigidbody: {fileID: 2665289652323244295}
   _model: {fileID: 4273702077629635582}
   _maxFollowDelta: 0.5
-  _isBreakable: 1
+  _isBreakable: 0
   _breakVelocity: 1
   _breakEffect: {fileID: 1062829035649641979}
-  breakEvent:
+  OnBreak:
     m_PersistentCalls:
       m_Calls: []
 --- !u!54 &2665289652323244295
@@ -216,7 +215,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071065, y: -0, z: -0, w: 0.7071072}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4273702077629635582}
