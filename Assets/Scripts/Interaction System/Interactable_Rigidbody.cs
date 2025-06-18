@@ -9,6 +9,7 @@ public class Interactable_Rigidbody : Interactable
 
     [Header("Configuration")]
     [SerializeField] private float _maxFollowDelta;
+    [SerializeField] private float _turningRate = 30f;
     [SerializeField] private bool _isBreakable;
     [HideInInspector][SerializeField] private float _breakVelocity;
     [HideInInspector][SerializeField] private ParticleSystem _breakEffect;
@@ -36,6 +37,8 @@ public class Interactable_Rigidbody : Interactable
         _rigidbody.WakeUp();
 
         _rigidbody.position = Vector3.MoveTowards(_rigidbody.position, _holdPosition.position, _maxFollowDelta);
+
+        _rigidbody.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.up), _turningRate * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider collision)

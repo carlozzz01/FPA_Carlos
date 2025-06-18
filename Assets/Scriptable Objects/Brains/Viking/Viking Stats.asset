@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Viking Stats
   m_EditorClassIdentifier: 
   _patrolSpeed: 1
-  _chaseSpeed: 2
-  _reach: 10
+  _chaseSpeed: 4
+  _reach: 50
   _timeToDisengage: 20
   _minAttackRange: 2
   _lookSphereCastRadius: 2

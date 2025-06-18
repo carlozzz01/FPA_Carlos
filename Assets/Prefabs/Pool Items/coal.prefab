@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 7691700569742877}
   m_Layer: 8
   m_Name: coal
-  m_TagString: Untagged
+  m_TagString: Rigidbody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,8 +201,8 @@ Rigidbody:
   m_GameObject: {fileID: 7651928496590275531}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.5
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -231,12 +231,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4311f2971c3c4404aa1f326363b3b9de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactOnTriggerEnter: 0
   _collider: {fileID: 5707509239234185723}
   _handle: {fileID: 0}
   _rigidbody: {fileID: 2901085673703260235}
   _model: {fileID: 4112043382516116058}
   _maxFollowDelta: 1
+  _turningRate: 30
   _isBreakable: 0
   _breakVelocity: 0
   _breakEffect: {fileID: 0}

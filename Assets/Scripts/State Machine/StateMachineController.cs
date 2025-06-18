@@ -10,7 +10,6 @@ public class StateMachineController : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Transform _eyes;
-    private int _nextWaypointIndex;
     private Transform _NextWaypoint => _waypoints[_nextWaypointIndex];
     public Vector3 Velocity => _navMeshAgent.velocity;
 
@@ -22,6 +21,7 @@ public class StateMachineController : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private Transform _target;
     [SerializeField] private float _stateTimer = 0f;
+    [SerializeField] private int _nextWaypointIndex;
     private Vector3 _suspicionPoint;
     private List<Vector3> _heardSounds;
     private Vector3 _currentSoundPosition;
