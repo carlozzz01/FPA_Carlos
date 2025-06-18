@@ -1,9 +1,15 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
+    [Header("Game Over")]
     [SerializeField] private CanvasGroup _gameOver;
+    [SerializeField] private float _gameOverFadeDuration;
+    [SerializeField] private Button _restartButton;
 
     [Header("Damage Flash")]
     [SerializeField] private float _damageFlashDurationIn;
@@ -32,8 +38,6 @@ public class GameUIManager : MonoBehaviour
 
     private IEnumerator DamageFlash()
     {
-        Debug.Log("damage flash");
-
         _damageFlash.alpha = 0;
 
         float timer = 0;
@@ -65,5 +69,40 @@ public class GameUIManager : MonoBehaviour
         }
 
         _damageFlash.alpha = 0;
+
+        ShowGameOver(true);
+    }
+
+    private void ShowGameOver(bool value)
+    {
+        StartCoroutine(DisplayGameOver(value));
+    }
+
+    private IEnumerator DisplayGameOver(bool value)
+    {
+        float timer = 0;
+
+        float goalAlpha = value ? 1 : 0;
+        float startAlpha = value ? 0 : 1;
+
+        float t = 0;
+
+        while (timer < _gameOverFadeDuration)
+        {
+            t = timer / _gameOverFadeDuration;
+
+            _gameOver.alpha = Mathf.Lerp(startAlpha, goalAlpha, t);
+
+            timer += Time.deltaTime;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        _gameOver.alpha = goalAlpha;
+
+        if (value)
+        {
+            EventSystem.current.SetSelectedGameObject(_restartButton.gameObject);
+        }
     }
 }

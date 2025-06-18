@@ -201,9 +201,12 @@ public class Player : MonoBehaviour, IPlayerActions
 
         _head.rotation = enemyDirRotation;
 
-        // Debug.Log("damage flash");
+        // 18/06/2025 los servidores de mixamo están caídos. 
+        // me gustaría poner esta parte inferior (la llamada al flash de la imagen de daño) tras una llamada por Animation Event, pero no va a poder ser
+        // tengo las animaciones extraidas, no tengo los .fbx de mixamo a los que le puedo editar las animaciones 
+        yield return new WaitForSeconds(0.3f);
 
-        // GameUIManager.Instance.TriggerDamageFlash();
+        GameUIManager.Instance.TriggerDamageFlash();
     }
 }
 
