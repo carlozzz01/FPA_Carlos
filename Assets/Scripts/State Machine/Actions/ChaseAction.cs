@@ -13,7 +13,7 @@ public class ChaseAction : StateAction
     {
         if (controller.Target == null) return;
 
-        controller.GoToLastTargetPosition();
+        // controller.GoToSuspicionPoint();
         controller.Chase();
 
         // if (controller.IsCloseToDestination())

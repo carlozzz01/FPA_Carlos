@@ -4,11 +4,12 @@ using UnityEngine.AI;
 
 public class StateMachineController : MonoBehaviour
 {
-    [Header("Components")]
     [SerializeField] private State _currentState;
+
+    [Header("Components")]
     [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _navMeshAgent;
-    [SerializeField] private List<Transform> _waypoints;
+    [SerializeField] private Transform _eyes;
     private int _nextWaypointIndex;
     private Transform _NextWaypoint => _waypoints[_nextWaypointIndex];
     public Vector3 Velocity => _navMeshAgent.velocity;
@@ -16,12 +17,14 @@ public class StateMachineController : MonoBehaviour
     [Header("Configuration")]
     [SerializeField] private bool _aiActive = true;
     [SerializeField] private EnemyStats _stats;
-    [SerializeField] private Transform _eyes;
-    private Transform _target;
-    private Vector3 _lastSpottedTargetPosition;
+    [SerializeField] private List<Transform> _waypoints;
+
+    [Header("Debug")]
+    [SerializeField] private Transform _target;
+    [SerializeField] private float _stateTimer = 0f;
+    private Vector3 _suspicionPoint;
     private List<Vector3> _heardSounds;
     private Vector3 _currentSoundPosition;
-    private float _stateTimer = 0f;
     private bool _isStateTimerRunning = false;
 
     public Transform Eyes => _eyes;
@@ -34,7 +37,7 @@ public class StateMachineController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(_lastSpottedTargetPosition, 0.5f);
+        Gizmos.DrawWireSphere(_suspicionPoint, 0.5f);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(_currentSoundPosition, 0.5f);
@@ -63,10 +66,12 @@ public class StateMachineController : MonoBehaviour
         {
             _currentState.EndState(this);
             _currentState = nextState;
+
+            // _stateTimer = 0f;
+            // _isStateTimerRunning = false;
+
             _currentState.StartState(this);
 
-            _stateTimer = 0f;
-            _isStateTimerRunning = true;
             Debug.Log($"transitioning to state {_currentState.name}");
         }
     }
@@ -121,12 +126,17 @@ public class StateMachineController : MonoBehaviour
     public void SetTarget(Transform target)
     {
         _target = target;
-        _lastSpottedTargetPosition = target != null ? target.position : _lastSpottedTargetPosition;
+        _suspicionPoint = target != null ? target.position : _suspicionPoint;
     }
 
-    public void GoToLastTargetPosition()
+    public void SetSuspicion(Vector3 position)
     {
-        SetDestination(_lastSpottedTargetPosition);
+        _suspicionPoint = position;
+    }
+
+    public void GoToSuspicionPoint()
+    {
+        SetDestination(_suspicionPoint);
     }
 
     public void GoToLastSoundPosition()
@@ -136,6 +146,8 @@ public class StateMachineController : MonoBehaviour
 
     public void Chase()
     {
+        SetDestination(_target.position);
+
         _navMeshAgent.speed = _stats.ChaseSpeed;
     }
 
@@ -167,6 +179,8 @@ public class StateMachineController : MonoBehaviour
 
     internal void StartStateTimer(float duration)
     {
+        Debug.Log($"Start Timer with duration of {duration}");
+
         _isStateTimerRunning = true;
         _stateTimer = duration;
     }
@@ -174,5 +188,11 @@ public class StateMachineController : MonoBehaviour
     public void DecreaseStateTimer()
     {
         _stateTimer -= Time.deltaTime;
+    }
+
+    public void StopStateTimer()
+    {
+        _stateTimer = -1;
+        _isStateTimerRunning = false;
     }
 }

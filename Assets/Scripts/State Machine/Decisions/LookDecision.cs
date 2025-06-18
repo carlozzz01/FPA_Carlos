@@ -28,7 +28,7 @@ public class LookDecision : Decision
 
         if (targetFound)
         {
-            controller.SetTarget(hit.transform);
+            controller.SetSuspicion(hit.transform.position);
 
             return true;
         }

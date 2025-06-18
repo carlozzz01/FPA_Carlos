@@ -11,6 +11,15 @@ public class StateTimerEndDecision : Decision
 
     private bool CheckTimer(StateMachineController controller)
     {
-        return controller.StateTimer <= 0;
+        if (controller.StateTimer <= 0)
+        {
+            controller.StopStateTimer();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
