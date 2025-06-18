@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87f9caa29937374a9f9eafe5ea04983, type: 3}
   m_Name: Attack State
   m_EditorClassIdentifier: 
-  _startActions: []
-  _actions:
+  _startActions:
+  - {fileID: 11400000, guid: b26bbaae73e172e4f8d53ec4b9bba1c8, type: 2}
   - {fileID: 11400000, guid: 87f0d327832336c4c88d7a38e0b96764, type: 2}
-  - {fileID: 11400000, guid: 87f0d327832336c4c88d7a38e0b96764, type: 2}
+  _actions: []
   _endActions: []
   _transitions: []

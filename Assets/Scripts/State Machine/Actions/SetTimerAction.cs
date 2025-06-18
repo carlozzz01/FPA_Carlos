@@ -7,14 +7,16 @@ public class SetTimerAction : StateAction
 
     public override void Act(StateMachineController controller)
     {
+        Debug.Log($"Start Timer with duration of {_timerDuration}");
+
         SetTimer(controller);
     }
 
     private void SetTimer(StateMachineController controller)
     {
-        if (!controller.IsStateTimerRunning())
-        {
+        // if (!controller.IsStateTimerRunning())
+        // {
             controller.StartStateTimer(_timerDuration);
-        }
+        // }
     }
 }

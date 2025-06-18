@@ -18,12 +18,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 58d8f9d7a0e935347a8d4b106f6b7124, type: 2}
   _endActions: []
   _transitions:
+  - _decision: {fileID: 11400000, guid: a77308ba6cd1ce543b5616156448d861, type: 2}
+    _stateOnTrue: {fileID: 11400000, guid: 6ed86f372f5fa094aaf5aca7a5104d32, type: 2}
+    _stateOnFalse: {fileID: 0}
   - _decision: {fileID: 11400000, guid: 4332317858186064f9d2a236c9b0c5c9, type: 2}
     _stateOnTrue: {fileID: 11400000}
     _stateOnFalse: {fileID: 11400000, guid: 84d1cc62f26f04e4186c24d01e8da914, type: 2}
   - _decision: {fileID: 11400000, guid: 28ab6b5bf84da3a45a867268059075d3, type: 2}
     _stateOnTrue: {fileID: 11400000, guid: 84d1cc62f26f04e4186c24d01e8da914, type: 2}
-    _stateOnFalse: {fileID: 0}
-  - _decision: {fileID: 11400000, guid: a77308ba6cd1ce543b5616156448d861, type: 2}
-    _stateOnTrue: {fileID: 11400000, guid: 6ed86f372f5fa094aaf5aca7a5104d32, type: 2}
     _stateOnFalse: {fileID: 0}

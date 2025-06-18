@@ -10,15 +10,15 @@ namespace Managers
         [SerializeField] private GameObject _playerActionsGO;
         [SerializeField] private GameObject _uiActionsGO;
         // [SerializeField] private GameObject _gameActionsGO;
-    
+
         private PlayerInputs _inputs;
         private IPlayerActions _playerActions;
         private IUIActions _uiActions;
         // private IGameActions _gameActions;
-    
+
         private static InputController _instance;
         public static InputController Instance => _instance;
-    
+
         private void Awake()
         {
             if (_instance == null)
@@ -29,31 +29,31 @@ namespace Managers
             {
                 Destroy(this);
             }
-    
+
             _inputs = new PlayerInputs();
         }
-    
+
         private void OnEnable()
         {
-            // GameManager.OnGamePaused += PausePlayerInputs;
-            // GameManager.OnGameOver += () => PausePlayerInputs(true);
+            GameManager.OnGamePaused += PausePlayerInputs;
+            GameManager.OnGameOver += DisablePlayerInputs;
         }
-    
+
         private void OnDisable()
         {
-            // GameManager.OnGamePaused -= PausePlayerInputs;
-            // GameManager.OnGameOver -= () => PausePlayerInputs(true);
+            GameManager.OnGamePaused -= PausePlayerInputs;
+            GameManager.OnGameOver -= DisablePlayerInputs;
         }
-    
+
         private void Start()
         {
             InitializeInputs();
-    
+
             EnablePlayerInputs(true);
-    
+
             EnableUIInputs(false);
         }
-    
+
         /// <summary>
         /// Initializes and connects the inputs to the scripts that use the inputs interfaces
         /// </summary>
@@ -62,23 +62,23 @@ namespace Managers
             if (_playerActionsGO != null) _playerActions = _playerActionsGO.GetComponent<IPlayerActions>();
             if (_uiActionsGO != null) _uiActions = _uiActionsGO.GetComponent<IUIActions>();
             // if (_gameActionsGO != null) _gameActions = _gameActionsGO.GetComponent<IGameActions>();
-    
+
             if (_playerActions != null)
             {
                 _inputs.Player.AddCallbacks(_playerActions);
             }
-    
+
             if (_uiActions != null)
             {
                 _inputs.UI.AddCallbacks(_uiActions);
             }
-    
+
             // if (_gameActions != null)
             // {
-                // _inputs.Game.AddCallbacks(_gameActions);
+            // _inputs.Game.AddCallbacks(_gameActions);
             // }
         }
-    
+
         /// <summary>
         /// Handles the Player input state
         /// </summary>
@@ -94,7 +94,7 @@ namespace Managers
                 _inputs.Player.Disable();
             }
         }
-    
+
         /// <summary>
         /// Handles the UI input state
         /// </summary>
@@ -110,7 +110,7 @@ namespace Managers
                 _inputs.UI.Disable();
             }
         }
-    
+
         /// <summary>
         /// Habdles the Mouse state
         /// </summary>
@@ -120,7 +120,7 @@ namespace Managers
             Cursor.lockState = state ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = state;
         }
-    
+
         /// <summary>
         /// Handles the Player's inputs when pausing the game
         /// </summary>
@@ -128,8 +128,13 @@ namespace Managers
         private void PausePlayerInputs(bool obj)
         {
             EnablePlayerInputs(!obj);
-    
+
             EnableUIInputs(obj);
+        }
+
+        private void DisablePlayerInputs()
+        {
+            EnablePlayerInputs(false);
         }
     }
 }

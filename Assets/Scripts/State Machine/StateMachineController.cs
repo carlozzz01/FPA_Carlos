@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,7 +11,6 @@ public class StateMachineController : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Transform _eyes;
-    private int _nextWaypointIndex;
     private Transform _NextWaypoint => _waypoints[_nextWaypointIndex];
     public Vector3 Velocity => _navMeshAgent.velocity;
 
@@ -21,11 +21,12 @@ public class StateMachineController : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private Transform _target;
+    [SerializeField] private int _nextWaypointIndex;
     [SerializeField] private float _stateTimer = 0f;
+    [SerializeField] private bool _isStateTimerRunning = false;
     private Vector3 _suspicionPoint;
     private List<Vector3> _heardSounds;
     private Vector3 _currentSoundPosition;
-    private bool _isStateTimerRunning = false;
 
     public Transform Eyes => _eyes;
     public EnemyStats Stats => _stats;
@@ -41,11 +42,27 @@ public class StateMachineController : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(_currentSoundPosition, 0.5f);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, _stats.Reach);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _stats.HearRange);
     }
 
     private void Awake()
     {
         _heardSounds = new List<Vector3>();
+    }
+
+    private void OnEnable()
+    {
+        GameManager.OnGameOver += OnGameOver;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnGameOver -= OnGameOver;
     }
 
     private void Start()
@@ -65,14 +82,15 @@ public class StateMachineController : MonoBehaviour
         if (nextState != _currentState)
         {
             _currentState.EndState(this);
+
+            _stateTimer = 0f;
+            _isStateTimerRunning = false;
+
+            Debug.Log($"transitioning to state {nextState.name}");
+
             _currentState = nextState;
 
-            // _stateTimer = 0f;
-            // _isStateTimerRunning = false;
-
             _currentState.StartState(this);
-
-            Debug.Log($"transitioning to state {_currentState.name}");
         }
     }
 
@@ -177,10 +195,8 @@ public class StateMachineController : MonoBehaviour
         return _isStateTimerRunning;
     }
 
-    internal void StartStateTimer(float duration)
+    public void StartStateTimer(float duration)
     {
-        Debug.Log($"Start Timer with duration of {duration}");
-
         _isStateTimerRunning = true;
         _stateTimer = duration;
     }
@@ -194,5 +210,44 @@ public class StateMachineController : MonoBehaviour
     {
         _stateTimer = -1;
         _isStateTimerRunning = false;
+    }
+
+    private void OnGameOver()
+    {
+        StartCoroutine(RotateTowardsPlayer());
+    }
+
+    private IEnumerator RotateTowardsPlayer()
+    {
+        _navMeshAgent.isStopped = true;
+
+        Vector3 playerDir = Vector3.Normalize(GameManager.Instance.Player.position - transform.position);
+
+        Quaternion playerDirRotation = Quaternion.LookRotation(playerDir, Vector3.up);
+
+        transform.position = GameManager.Instance.Player.position - (playerDir.normalized * _stats.MinAttackRange * 2);
+
+        float timer = 0;
+
+        float time = GameManager.Instance.PlayerTurnDuration;
+
+        Quaternion initialRotation = transform.rotation;
+
+        while (timer < time)
+        {
+            playerDir = Vector3.Normalize(GameManager.Instance.Player.position - transform.position);
+
+            playerDirRotation = Quaternion.LookRotation(playerDir, Vector3.up);
+
+            transform.rotation = Quaternion.Slerp(initialRotation, playerDirRotation, timer / time);
+
+            timer += Time.deltaTime;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        transform.position = GameManager.Instance.Player.position - (playerDir.normalized * _stats.MinAttackRange * 2);
+
+        transform.rotation = playerDirRotation;
     }
 }

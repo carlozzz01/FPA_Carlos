@@ -11,6 +11,9 @@ public class AttackAction : StateAction
     private void Attack(StateMachineController controller)
     {
         controller.StopMoving();
+        
         Debug.Log("Attack player");
+
+        GameManager.Instance.GameOver();
     }
 }

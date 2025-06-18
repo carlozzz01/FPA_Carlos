@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: -5042986847039180094}
   m_Layer: 8
   m_Name: rock_01
-  m_TagString: Untagged
+  m_TagString: Rigidbody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 2665289652323244295}
   _model: {fileID: 4273702077629635582}
   _maxFollowDelta: 0.5
+  _turningRate: 30
   _isBreakable: 0
   _breakVelocity: 1
   _breakEffect: {fileID: 1062829035649641979}
@@ -133,8 +134,8 @@ Rigidbody:
   m_GameObject: {fileID: 4699319868420669453}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 0.5
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

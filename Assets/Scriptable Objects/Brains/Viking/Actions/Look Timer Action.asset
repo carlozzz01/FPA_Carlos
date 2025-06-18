@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a60e62406ae32429adf3bd1a27f4c9, type: 3}
   m_Name: Look Timer Action
   m_EditorClassIdentifier: 
-  _timerDuration: 4.25
+  _timerDuration: 8.5

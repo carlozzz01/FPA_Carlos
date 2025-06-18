@@ -14,17 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startActions:
   - {fileID: 11400000, guid: 7b54c1436d7921d48aee5b7c8d7d7d1a, type: 2}
-  _actions:
   - {fileID: 11400000, guid: 0cf4c28c1bad9934cb0629ce41789755, type: 2}
+  _actions:
   - {fileID: 11400000, guid: 61b9a3de8390a4549b458824f6d3493d, type: 2}
   _endActions: []
   _transitions:
-  - _decision: {fileID: 11400000, guid: 072596fed3ae96a4ca8b4f45c61dc6db, type: 2}
-    _stateOnTrue: {fileID: 11400000, guid: 73202af8df93c8743bfca09c576df8a9, type: 2}
-    _stateOnFalse: {fileID: 0}
   - _decision: {fileID: 11400000, guid: 4332317858186064f9d2a236c9b0c5c9, type: 2}
-    _stateOnTrue: {fileID: 11400000, guid: 84d1cc62f26f04e4186c24d01e8da914, type: 2}
+    _stateOnTrue: {fileID: 11400000, guid: d90bc68b75bc0234894dfac564eec17e, type: 2}
+    _stateOnFalse: {fileID: 0}
+  - _decision: {fileID: 11400000, guid: 1b75c04d6490c7a40ad765a13d1b44f5, type: 2}
+    _stateOnTrue: {fileID: 11400000, guid: d90bc68b75bc0234894dfac564eec17e, type: 2}
     _stateOnFalse: {fileID: 0}
   - _decision: {fileID: 11400000, guid: 9f1a0e3c10a8d1945bfd88f6f4008897, type: 2}
     _stateOnTrue: {fileID: 11400000, guid: 84d1cc62f26f04e4186c24d01e8da914, type: 2}
+    _stateOnFalse: {fileID: 0}
+  - _decision: {fileID: 11400000, guid: 072596fed3ae96a4ca8b4f45c61dc6db, type: 2}
+    _stateOnTrue: {fileID: 11400000, guid: 73202af8df93c8743bfca09c576df8a9, type: 2}
+    _stateOnFalse: {fileID: 0}
+  - _decision: {fileID: 11400000, guid: a77308ba6cd1ce543b5616156448d861, type: 2}
+    _stateOnTrue: {fileID: 11400000, guid: 6ed86f372f5fa094aaf5aca7a5104d32, type: 2}
     _stateOnFalse: {fileID: 0}

@@ -12,7 +12,7 @@ public class State : ScriptableObject
     {
         for (int i = 0; i < actions.Length; i++)
         {
-            _actions[i].Act(controller);
+            actions[i].Act(controller);
         }
     }
 
