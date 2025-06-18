@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static PlayerInputs;
@@ -37,12 +38,14 @@ public class Player : MonoBehaviour, IPlayerActions
     {
         InspectorManager.OnInspectStarted += OnInspectStarted;
         InspectorManager.OnInspectCanceled += OnInspectCanceled;
+        GameManager.OnGameOver += OnGameOver;
     }
 
     private void OnDisable()
     {
         InspectorManager.OnInspectStarted -= OnInspectStarted;
         InspectorManager.OnInspectCanceled -= OnInspectCanceled;
+        GameManager.OnGameOver -= OnGameOver;
     }
 
     private void Awake()
@@ -164,6 +167,43 @@ public class Player : MonoBehaviour, IPlayerActions
     private void OnInspectCanceled()
     {
         state = PlayerState.Walk;
+    }
+
+    private void OnGameOver()
+    {
+        StartCoroutine(RotateTowardsEnemy());
+    }
+
+    private IEnumerator RotateTowardsEnemy()
+    {
+        Vector3 enemyDir = Vector3.Normalize(GameManager.Instance.Viking.Eyes.position - _head.position);
+
+        Quaternion enemyDirRotation = Quaternion.LookRotation(enemyDir, Vector3.up);
+
+        float timer = 0;
+
+        float time = GameManager.Instance.PlayerTurnDuration;
+
+        Quaternion initialRotation = _head.rotation;
+
+        while (timer < time)
+        {
+            enemyDir = Vector3.Normalize(GameManager.Instance.Viking.Eyes.position - _head.position);
+
+            enemyDirRotation = Quaternion.LookRotation(enemyDir, Vector3.up);
+
+            _head.rotation = Quaternion.Slerp(initialRotation, enemyDirRotation, timer / time);
+
+            timer += Time.deltaTime;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        _head.rotation = enemyDirRotation;
+
+        // Debug.Log("damage flash");
+
+        // GameUIManager.Instance.TriggerDamageFlash();
     }
 }
 
