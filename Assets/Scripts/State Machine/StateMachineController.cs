@@ -41,6 +41,12 @@ public class StateMachineController : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(_currentSoundPosition, 0.5f);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, _stats.Reach);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _stats.HearRange);
     }
 
     private void Awake()
@@ -67,8 +73,8 @@ public class StateMachineController : MonoBehaviour
             _currentState.EndState(this);
             _currentState = nextState;
 
-            // _stateTimer = 0f;
-            // _isStateTimerRunning = false;
+            _stateTimer = 0f;
+            _isStateTimerRunning = false;
 
             _currentState.StartState(this);
 
