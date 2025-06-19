@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a1b5f372ad724468ff43885be90494, type: 3}
-  m_Name: Look Timer End Decision
+  m_Script: {fileID: 11500000, guid: 3ae633c0c8baad847bdc345358673791, type: 3}
+  m_Name: Trigger Walk Action
   m_EditorClassIdentifier: 
+  _parameter: walk
+  _animationType: 1

@@ -132,6 +132,9 @@ namespace Managers
             EnableUIInputs(obj);
         }
 
+        /// <summary>
+        /// Directly deactivates player inputs
+        /// </summary>
         private void DisablePlayerInputs()
         {
             EnablePlayerInputs(false);

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87f9caa29937374a9f9eafe5ea04983, type: 3}
+  m_Name: Stun State
+  m_EditorClassIdentifier: 
+  _startActions:
+  - {fileID: 11400000, guid: c7131b1fac4dfad4fb8983b315b32a0a, type: 2}
+  - {fileID: 11400000, guid: 4785e2b42b7473148952e94dfcf3da17, type: 2}
+  - {fileID: 11400000, guid: 2deb0b128f2c9964883b8f2077dadeff, type: 2}
+  - {fileID: 11400000, guid: f20c2199f241b22418b6039f86e585aa, type: 2}
+  _actions:
+  - {fileID: 11400000, guid: 61b9a3de8390a4549b458824f6d3493d, type: 2}
+  _endActions:
+  - {fileID: 11400000, guid: 249ee519194b6fe4294d977e75615146, type: 2}
+  - {fileID: 11400000, guid: bec4c2211ddcbc54c99f934563dd96bd, type: 2}
+  _transitions:
+  - _decision: {fileID: 11400000, guid: 072596fed3ae96a4ca8b4f45c61dc6db, type: 2}
+    _stateOnTrue: {fileID: 11400000, guid: f6f793302e6fcbf458b0d79169d70f4a, type: 2}
+    _stateOnFalse: {fileID: 0}

@@ -16,7 +16,7 @@ MonoBehaviour:
   _chaseSpeed: 5
   _reach: 35
   _timeToDisengage: 20
-  _minAttackRange: 0.5
+  _minAttackRange: 0.4
   _lookSphereCastRadius: 2
   _fieldOfView: 90
   _targetLayers:

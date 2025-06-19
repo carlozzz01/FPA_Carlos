@@ -31,6 +31,3 @@ MonoBehaviour:
   - _decision: {fileID: 11400000, guid: 072596fed3ae96a4ca8b4f45c61dc6db, type: 2}
     _stateOnTrue: {fileID: 11400000, guid: 73202af8df93c8743bfca09c576df8a9, type: 2}
     _stateOnFalse: {fileID: 0}
-  - _decision: {fileID: 11400000, guid: a77308ba6cd1ce543b5616156448d861, type: 2}
-    _stateOnTrue: {fileID: 11400000, guid: 6ed86f372f5fa094aaf5aca7a5104d32, type: 2}
-    _stateOnFalse: {fileID: 0}
