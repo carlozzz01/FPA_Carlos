@@ -65,7 +65,7 @@ public class Interactable_Rigidbody : Interactable
             if (broke)
             {
                 // Deactivate the model, play vfx, and call break event
-                
+
                 _model.gameObject.SetActive(false);
 
                 _breakEffect.Play();
@@ -79,29 +79,39 @@ public class Interactable_Rigidbody : Interactable
     {
         if (player.IsHoldingPickable && player.currentInteractable == this)
         {
-            _holdPosition = null;
-
-            _rigidbody.useGravity = true;
-
-            _rigidbody.WakeUp();
-
-            // _rigidbody.linearDamping = _initialDamping;
-
-            _rigidbody.linearVelocity = Vector3.zero;
+            Drop();
         }
         else
         {
-            _holdPosition = player.RigidbodyHolder;
-
-            // to wake rigidbody up
-            _rigidbody.WakeUp();
-
-            _rigidbody.useGravity = false;
-
-            // _rigidbody.linearDamping = 10;
-
-            _rigidbody.linearVelocity = Vector3.zero;
+            PickUp(player);
         }
+    }
+
+    private void PickUp(PlayerInteraction player)
+    {
+        _holdPosition = player.RigidbodyHolder;
+
+        // to wake rigidbody up
+        _rigidbody.WakeUp();
+
+        _rigidbody.useGravity = false;
+
+        // _rigidbody.linearDamping = 10;
+
+        _rigidbody.linearVelocity = Vector3.zero;
+    }
+
+    public void Drop()
+    {
+        _holdPosition = null;
+
+        _rigidbody.useGravity = true;
+
+        _rigidbody.WakeUp();
+
+        // _rigidbody.linearDamping = _initialDamping;
+
+        _rigidbody.linearVelocity = Vector3.zero;
     }
 
     public void SetBreakVelocity(float velocity)
@@ -112,5 +122,10 @@ public class Interactable_Rigidbody : Interactable
     public void SetBreakEffect(ParticleSystem effect)
     {
         _breakEffect = effect;
+    }
+
+    public void RotateUpwards()
+    {
+        _rigidbody.rotation = Quaternion.Euler(Vector3.up);
     }
 }

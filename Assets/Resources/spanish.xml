@@ -43,6 +43,20 @@ Solo entonces podrás encender lo que falta.
 
 Camina con cuidado.
         </string>
+        <string key="title">Prueba de fuego</string>
+        <string key="start">Empezar</string>
+        <string key="restart">Reiniciar</string>
+        <string key="game_over">Has perdido</string>
+        <string key="game_won">Has ganado</string>
+        <string key="pause">Pausa</string>
+        <string key="exit">Salir</string>
+        <string key="options">Opciones</string>
+        <string key="close">Cerrar</string>
+        <string key="volume">Volumen</string>
+        <string key="masterVolume">Volumen Maestro</string>
+        <string key="musicVolume">Volumen de Música</string>
+        <string key="sfxVolume">Volumen de Efectos</string>
+        <string key="no_key">Necesito una llave...</string>
     </lang>
 </main>
 

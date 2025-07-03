@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -9,6 +10,15 @@ namespace Managers
 {
     public class GameUIManager : MonoBehaviour
     {
+        [Header("Pause")]
+        [SerializeField] private CanvasGroup _pause;
+
+        [Header("Game Won")]
+        [SerializeField] private CanvasGroup _victory;
+
+        [SerializeField] private float _gameWonFadeDuration;
+        [SerializeField] private Button _replayButton;
+
         [Header("Game Over")]
         [SerializeField] private CanvasGroup _gameOver;
         [SerializeField] private float _gameOverFadeDuration;
@@ -34,11 +44,29 @@ namespace Managers
             }
         }
 
+        private void OnEnable()
+        {
+            GameManager.OnGamePaused += EnablePauseMenu;
+            GameManager.OnGameWon += () => DisplayGameWon(true);
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnGamePaused -= EnablePauseMenu;
+        }
+
+        /// <summary>
+        /// Starts damage flash
+        /// </summary>
         public void TriggerDamageFlash()
         {
             StartCoroutine(DamageFlash());
         }
 
+        /// <summary>
+        /// Smoothly flashes Damage Image, and shows Game Over at the end
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator DamageFlash()
         {
             _damageFlash.alpha = 0;
@@ -76,11 +104,20 @@ namespace Managers
             ShowGameOver(true);
         }
 
+        /// <summary>
+        /// Displays/Hides Game Over screen
+        /// </summary>
+        /// <param name="value"></param>
         private void ShowGameOver(bool value)
         {
             StartCoroutine(DisplayGameOver(value));
         }
 
+        /// <summary>
+        /// Smoothly fades Game Over screen
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private IEnumerator DisplayGameOver(bool value)
         {
             float timer = 0;
@@ -102,12 +139,70 @@ namespace Managers
             }
 
             _gameOver.alpha = goalAlpha;
+            _gameOver.interactable = value;
+            _gameOver.blocksRaycasts = value;
 
             if (value)
             {
                 EventSystem.current.SetSelectedGameObject(_restartButton.gameObject);
                 InputController.Instance.EnableMouse(true);
             }
+        }
+
+        /// <summary>
+        /// Displays/Hides Game Over screen
+        /// </summary>
+        /// <param name="value"></param>
+        private void ShowGameWon(bool value)
+        {
+            StartCoroutine(DisplayGameWon(value));
+        }
+
+        /// <summary>
+        /// Smoothly fades Game Over screen
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private IEnumerator DisplayGameWon(bool value)
+        {
+            float timer = 0;
+
+            float goalAlpha = value ? 1 : 0;
+            float startAlpha = value ? 0 : 1;
+
+            float t = 0;
+
+            while (timer < _gameOverFadeDuration)
+            {
+                t = timer / _gameOverFadeDuration;
+
+                _victory.alpha = Mathf.Lerp(startAlpha, goalAlpha, t);
+
+                timer += Time.deltaTime;
+
+                yield return new WaitForEndOfFrame();
+            }
+
+            _victory.alpha = goalAlpha;
+            _victory.interactable = value;
+            _victory.blocksRaycasts = value;
+
+            if (value)
+            {
+                EventSystem.current.SetSelectedGameObject(_replayButton.gameObject);
+                InputController.Instance.EnableMouse(true);
+            }
+        }
+
+        /// <summary>
+        /// Activates pause menu depending on given bool
+        /// </summary>
+        /// <param name="state"></param>
+        private void EnablePauseMenu(bool state)
+        {
+            _pause.alpha = state ? 1 : 0f;
+            _pause.blocksRaycasts = state;
+            _pause.interactable = state;
         }
     }
 

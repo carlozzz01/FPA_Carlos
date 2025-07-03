@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,7 @@ public class StateMachineController : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Transform _eyes;
+    [SerializeField] private ParticleSystem _hitParticles;
     private Transform _NextWaypoint => _waypoints[_nextWaypointIndex];
     public Vector3 Velocity => _navMeshAgent.velocity;
 
@@ -24,6 +26,7 @@ public class StateMachineController : MonoBehaviour
     [SerializeField] private int _nextWaypointIndex;
     [SerializeField] private float _stateTimer = 0f;
     [SerializeField] private bool _isStateTimerRunning = false;
+    [SerializeField] private bool _firstHit;
     private Vector3 _suspicionPoint;
     private List<Vector3> _heardSounds;
     private Vector3 _currentSoundPosition;
@@ -231,6 +234,8 @@ public class StateMachineController : MonoBehaviour
         SetDestination(_target.position);
 
         _navMeshAgent.speed = _stats.ChaseSpeed;
+
+        AudioManager.Instance.PlayMusic("action");
     }
 
     /// <summary>
@@ -241,6 +246,8 @@ public class StateMachineController : MonoBehaviour
         GoToNextWaypoint();
 
         _navMeshAgent.speed = _stats.PatrolSpeed;
+
+        AudioManager.Instance.PlayMusic("ambient");
     }
 
     /// <summary>
@@ -352,6 +359,15 @@ public class StateMachineController : MonoBehaviour
     public void GetStunned(State state)
     {
         TransitionToState(state);
+
+        _hitParticles.Play();
+
+        // if (!_firstHit)
+        // {
+        //     _firstHit = true;
+
+        //     PoolManager.Instance.Pull("ingot", _hitParticles.transform.position, Quaternion.identity);
+        // }
     }
 
     /// <summary>

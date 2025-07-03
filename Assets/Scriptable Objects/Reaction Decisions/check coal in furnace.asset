@@ -18,4 +18,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _itemID: coal
-  _amountNeeded: 1
+  _amountNeeded: 3

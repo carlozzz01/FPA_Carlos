@@ -42,6 +42,10 @@ public class TextContainer : MonoBehaviour
         _canvasGroup.alpha = 0;
     }
 
+    /// <summary>
+    /// Reads Interact input
+    /// </summary>
+    /// <param name="context"></param>
     private void OnInteract(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -57,11 +61,18 @@ public class TextContainer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts displaying text character by character
+    /// </summary>
+    /// <param name="data"></param>
     public void DisplayText(TextData data)
     {
         StartCoroutine(DisplayText(1, _shownPoint.position, data.text, data.timeBetweenCharacters));
     }
 
+    /// <summary>
+    /// Displays text entirely
+    /// </summary>
     private void SkipTextBuild()
     {
         StopCoroutine(_buildCoroutine);
@@ -71,6 +82,12 @@ public class TextContainer : MonoBehaviour
         _text.text = _currentText;
     }
 
+    /// <summary>
+    /// Smoothly fades and move text towards given alpha and position
+    /// </summary>
+    /// <param name="goalAlpha"></param>
+    /// <param name="goalPosition"></param>
+    /// <returns></returns>
     private IEnumerator FadeTowards(float goalAlpha, Vector3 goalPosition)
     {
         float timer = 0;
@@ -91,6 +108,12 @@ public class TextContainer : MonoBehaviour
         _canvasGroup.transform.position = goalPosition;
     }
 
+    /// <summary>
+    /// Builds text character by character
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="timeBetweenCharacters"></param>
+    /// <returns></returns>
     private IEnumerator BuildText(string text, float timeBetweenCharacters)
     {
         _isBuilding = true;
@@ -109,6 +132,14 @@ public class TextContainer : MonoBehaviour
         _isBuilding = false;
     }
 
+    /// <summary>
+    /// Waits for text to fade in, then builds text
+    /// </summary>
+    /// <param name="goalAlpha"></param>
+    /// <param name="goalPosition"></param>
+    /// <param name="text"></param>
+    /// <param name="timeBetweenCharacters"></param>
+    /// <returns></returns>
     private IEnumerator DisplayText(float goalAlpha, Vector3 goalPosition, string text, float timeBetweenCharacters)
     {
         _isShowingText = true;
@@ -118,6 +149,12 @@ public class TextContainer : MonoBehaviour
         _buildCoroutine = StartCoroutine(BuildText(text, timeBetweenCharacters));
     }
 
+    /// <summary>
+    /// Waits for text to stop building, then fades text out
+    /// </summary>
+    /// <param name="goalAlpha"></param>
+    /// <param name="goalPosition"></param>
+    /// <returns></returns>
     private IEnumerator HideText(float goalAlpha, Vector3 goalPosition)
     {
         while (_isBuilding)
@@ -134,6 +171,9 @@ public class TextContainer : MonoBehaviour
         _isShowingText = false;
     }
 
+    /// <summary>
+    /// Starts hide text coroutine
+    /// </summary>
     public void HideText()
     {
         if (_isShowingText) StartCoroutine(HideText(0, _hiddenPoint.position));

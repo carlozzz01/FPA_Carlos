@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8215336549526463751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2925967392426483519}
+  - component: {fileID: 3384737885344247593}
+  m_Layer: 0
+  m_Name: Data Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2925967392426483519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8215336549526463751}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3384737885344247593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8215336549526463751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c3e36b25ba9ba4dbfd0f225b172d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _gameConditions:
+    - id: furnace_on
+      description: horno encendido? necesita haber carbon en el horno y usar el fuelle
+      _isConditionMet: 0
+    - id: bellows_fixed
+      description: fuelle arreglado? necesita tener mango de fuelle en inventario
+      _isConditionMet: 0
+    _gameItems:
+    - _id: key_mould
+      _description: molde para forjar una llave
+    - _id: bellows_handle
+      _description: mango para usar el fuelle de la forja
+    - _id: ingot
+      _description: lingote de metal
+  _fileName: data.dat
+  _dataPath: 

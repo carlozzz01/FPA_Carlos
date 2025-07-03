@@ -48,7 +48,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioMixer: {fileID: 24100000, guid: 4991a36fae11fa64fb881984b20bc944, type: 2}
-  _musicList: []
+  _musicList:
+  - id: death
+    clip: {fileID: 8300000, guid: c85a0073d2b0b4745a228c2b60762383, type: 3}
+    volume: 0.25
+  - id: complete
+    clip: {fileID: 8300000, guid: cc64eddce49e5f64eb4e9aea50a01629, type: 3}
+    volume: 0.25
+  - id: action
+    clip: {fileID: 8300000, guid: 9d20f80e0f0c87247836d55334273cf5, type: 3}
+    volume: 0.25
+  - id: ambient
+    clip: {fileID: 8300000, guid: 017a64b156f8acd489e3c66bd0ce6a6a, type: 3}
+    volume: 0.25
+  - id: mainMenu
+    clip: {fileID: 8300000, guid: 9c4c0b63b032c664a87f4b05bcbe868c, type: 3}
+    volume: 0.25
   _musicAudioSource: {fileID: 8310255076522881600}
   _sfxList:
   - id: coin

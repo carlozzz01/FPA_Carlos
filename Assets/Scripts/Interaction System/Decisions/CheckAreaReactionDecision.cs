@@ -22,37 +22,42 @@ public class CheckAreaReactionDecision : ReactionDecision
             Debug.Log(_hits.Length);
 
             bool matchingIDs = true;
+            int amountFound = 0;
 
             foreach (Collider hit in _hits)
             {
                 if (hit == null) continue;
 
-                Debug.Log(hit.name);
+                // Debug.Log(hit.name);
 
                 if (hit.TryGetComponent(out PoolEntity entity))
                 {
                     if (entity.ID != _itemID)
                     {
-                        Debug.Log("ID missmatch");
+                        // Debug.Log("ID missmatch");
 
                         matchingIDs = false;
+                    }
+                    else
+                    {
+                        amountFound++;
                     }
                 }
                 else
                 {
-                    Debug.Log("Type missmatch");
+                    // Debug.Log("Type missmatch");
 
                     matchingIDs = false;
                 }
             }
 
-            Debug.Log($"result {matchingIDs}");
+            // Debug.Log($"result {matchingIDs}");
 
-            return matchingIDs;
+            return amountFound >= _amountNeeded;
         }
         else
         {
-            Debug.Log($"No sufficient amount found: {_hits.Length}");
+            // Debug.Log($"No sufficient amount found: {_hits.Length}");
 
             return false;
         }

@@ -13,16 +13,20 @@ namespace Managers
     
         private static TranslationManager _instance;
         public static TranslationManager Instance => _instance;
+
+        public static Action OnTextLoaded;
     
         private void Awake()
         {
             if (_instance == null)
             {
                 _instance = this;
+
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
     
@@ -43,30 +47,32 @@ namespace Managers
     
             LoadText(xml);
         }
-    
+
         private void LoadText(XmlDocument xml)
         {
             _textDictionary = new Dictionary<string, string>();
 
             XmlElement element = xml.DocumentElement["lang"];
-    
+
             IEnumerator elementEnum = element.GetEnumerator();
-    
+
             while (elementEnum.MoveNext())
             {
                 XmlElement xmlItem = (XmlElement)elementEnum.Current;
 
                 string text = xmlItem.InnerText.Replace('[', '<').Replace(']', '>');
-    
+
                 _textDictionary.Add(xmlItem.GetAttribute("key"), text);
             }
+
+            OnTextLoaded?.Invoke();
         }
     
         public string GetText(string key)
         {
             if (!_textDictionary.ContainsKey(key))
             {
-                Debug.LogWarning("Key {key} does not exits");
+                Debug.LogWarning($"Key {key} does not exits");
     
                 return key;
             }
