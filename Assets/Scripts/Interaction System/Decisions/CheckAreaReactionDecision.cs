@@ -19,46 +19,27 @@ public class CheckAreaReactionDecision : ReactionDecision
 
         if (Physics.OverlapSphereNonAlloc(_checkPoint, _checkRadius, _hits, _checkLayers) >= _amountNeeded)
         {
-            Debug.Log(_hits.Length);
-
-            bool matchingIDs = true;
             int amountFound = 0;
 
             foreach (Collider hit in _hits)
             {
                 if (hit == null) continue;
 
-                // Debug.Log(hit.name);
-
                 if (hit.TryGetComponent(out PoolEntity entity))
                 {
-                    if (entity.ID != _itemID)
+                    if (entity.ID == _itemID)
                     {
-                        // Debug.Log("ID missmatch");
-
-                        matchingIDs = false;
-                    }
-                    else
-                    {
+                        Debug.Log(_itemID);
                         amountFound++;
                     }
                 }
-                else
-                {
-                    // Debug.Log("Type missmatch");
-
-                    matchingIDs = false;
-                }
             }
 
-            // Debug.Log($"result {matchingIDs}");
-
+            Debug.Log($"{_itemID} found?: {amountFound >= _amountNeeded}");
             return amountFound >= _amountNeeded;
         }
         else
         {
-            // Debug.Log($"No sufficient amount found: {_hits.Length}");
-
             return false;
         }
     }

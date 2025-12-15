@@ -10,12 +10,14 @@ namespace Managers
     {
         [SerializeField] private string _defaultLanguage = "spanish";
         private Dictionary<string, string> _textDictionary;
-    
+
+        public string CurrentLanguage { get; private set; }
+
         private static TranslationManager _instance;
         public static TranslationManager Instance => _instance;
 
         public static Action OnTextLoaded;
-    
+
         private void Awake()
         {
             if (_instance == null)
@@ -29,26 +31,59 @@ namespace Managers
                 Destroy(gameObject);
             }
         }
-    
+
         private void Start()
         {
-            string systemLanguage = Application.systemLanguage.ToString();
-    
-            TextAsset textAsset = Resources.Load<TextAsset>(systemLanguage);
-    
+            string language = PlayerPrefs.GetString("lang");
+
+            if (string.IsNullOrEmpty(language)) language = Application.systemLanguage.ToString();
+
+            TextAsset textAsset = Resources.Load<TextAsset>(language);
+
             if (textAsset == null)
             {
+                language = _defaultLanguage;
                 textAsset = Resources.Load<TextAsset>(_defaultLanguage);
             }
-    
+
+            CurrentLanguage = language;
+            PlayerPrefs.SetString("lang", language);
+            PlayerPrefs.Save();
+
             XmlDocument xml = new XmlDocument();
-    
+
             xml.LoadXml(textAsset.text);
-    
-            LoadText(xml);
+
+            LoadLanguage(xml);
         }
 
-        private void LoadText(XmlDocument xml)
+        /// <summary>
+        /// Switches languages
+        /// </summary>
+        /// <param name="languageKey"></param>
+        public void ChangeLanguage(string languageKey)
+        {
+            TextAsset textAsset = Resources.Load<TextAsset>(languageKey);
+
+            if (textAsset == null) return;
+
+            CurrentLanguage = languageKey;
+            PlayerPrefs.SetString("lang", languageKey);
+            PlayerPrefs.Save();
+
+            XmlDocument xml = new XmlDocument();
+
+            xml.LoadXml(textAsset.text);
+
+            LoadLanguage(xml);
+        }
+
+
+        /// <summary>
+        /// Loads the language xml
+        /// </summary>
+        /// <param name="xml"></param>
+        private void LoadLanguage(XmlDocument xml)
         {
             _textDictionary = new Dictionary<string, string>();
 
@@ -67,17 +102,30 @@ namespace Managers
 
             OnTextLoaded?.Invoke();
         }
-    
+
+        /// <summary>
+        /// Returns text with given key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public string GetText(string key)
         {
             if (!_textDictionary.ContainsKey(key))
             {
                 Debug.LogWarning($"Key {key} does not exits");
-    
+
                 return key;
             }
-    
+
             return _textDictionary[key];
+        }
+
+        /// <summary>
+        /// Calls for all TextTranslators to update
+        /// </summary>
+        public void InvokeOnTextLoaded()
+        {
+            OnTextLoaded?.Invoke();
         }
     }
 }

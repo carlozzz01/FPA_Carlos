@@ -1,53 +1,65 @@
 <main>
     <lang>
-        <string key="test01">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce turpis nunc, aliquam ac tempor sed, vehicula quis risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis dapibus tristique nisl, ac elementum urna varius quis. Nulla et lorem fringilla, sodales nibh ac, tempor nisi.</string>
-        <string key="scroll_open_01">A mi hijo,
-Hoy cumples tus [color=#DAA520FF]dieciséis inviernos[/color]. Has despertado donde debes, bajo el cielo y sobre la tierra fría.
-Como dicta la tradición del hierro y la sangre, hoy debes probar que tienes mano para el oficio. No basta con haber crecido… hay que templarse.
-Si quieres volver a [color=#DAA520FF]cruzar esta puerta[/color], empieza por lo primero:
-[color=#B22222]Que la fragua respire.[/color]
-El [color=#DAA520FF]horno está dormido[/color]. Para despertarlo, busca el carbón. Dejé algo guardado en [color=#DAA520FF]tres barriles pequeños[/color] por el jardín. No intentes romperlos con las manos, sino aprovechar su [color=#DAA520FF]fragilidad[/color].
-Cuando lo consigas, [color=#DAA520FF]echa el carbón en el horno[/color] y [color=#DAA520FF]pon en marcha el fuelle[/color].
-Las herramientas no hablan, pero enseñan al que observa.
-Recuerda bien esto, como lo hizo tu abuelo y el padre de su padre:
-[color=#DAA520FF]Vale más la maña que la fuerza.[/color]
-Si no sabes valerte por ti mismo, [color=#800000]no entres.[/color]
-- Tu padre
+        <string key="test01">Lorem ipsum dolor sit amet.</string>
+
+        <string key="scroll_open_01">To my son,
+Today you complete your [color=#DAA520FF]sixteen winters[/color].
+As tradition dictates, today you must prove you have a hand for the craft.
+If you want to cross this door again, start with the first task:
+[color=#B22222]Let the forge breathe.[/color]
+The fire is asleep. To awaken it, look for the coal stored in three small barrels around the garden.
+Manage on your own and show me you can fend for yourself.
+- Your father
         </string>
-        <string key="scroll_open_02">No todo lo útil brilla ni todo lo largo es lanza.
 
-El mango que buscas no está lejos,
-solo se esconde entre sus hermanas:
-[color=#DAA520FF]alargadas, de madera, y con punta aguda.[/color]
+        <string key="scroll_open_02">Not all that is useful shines, nor is everything long a spear.
 
-Mira con atención. Una de ellas no nació para herir,
-sino para dar aliento al fuego.
+The handle you seek is not far,
+it only hides among its sisters:
+[color=#DAA520FF]long, wooden, and sharp-tipped.[/color]
+
+Look closely. One of them was not born to wound,
+but to give breath to the fire.
         </string>
-        <string key="bellows_default">Hmmm... Parece que al fuelle le falta el mango para que funcione.</string>
-        <string key="scroll_open_03">Si has llegado hasta aquí, ya sabes que no estás solo.
 
-Hay un hombre grande rondando estos pasillos. [color=#B22222]Si te ve, te seguirá. Y si te alcanza, no llegarás más lejos.[/color]
+        <string key="bellows_default">Hmmm... It seems the bellows is missing the handle to work.</string>
 
-Pero no todo puede contigo. [color=#DAA520FF]Cajas, rincones y sombras serán tus mejores aliados.[/color]
-Haz ruido lejos de ti, y caminará hacia el eco.
+        <string key="scroll_open_03">If you’ve made it this far, you already know you’re not alone.
+There is a large man wandering these halls. If he sees you, he will follow you. And if he reaches you, you won’t get any farther.
+Corners and shadows will be your best allies.
+Make noise far from yourself, and he will walk toward the echo.
 
-Ahora, abre bien los ojos.
+Now, open your eyes wide.
+That tree holds more than fruit.
+Look up…
+What you seek rests among the branches, but it cannot be brought down by hand:
+make it fall with a well-thrown stone.
 
-[color=#DAA520FF]Aquel árbol guarda más que savia.[/color]
-Mira hacia lo alto…
-
-[color=#DAA520FF]Lo que buscas descansa entre las ramas,[/color] pero no se baja con manos:
-[color=#708090]hazlo caer con una piedra bien lanzada.[/color]
-
-Solo entonces podrás encender lo que falta.
-
-Camina con cuidado.
+Only then will you be able to ignite what is missing.
         </string>
-        <string key="title">Prueba de fuego</string>
+
+        <string key="title">Trial by Fire</string>
         <string key="start">Start</string>
         <string key="restart">Restart</string>
-        <string key="game_over">Game Over</string>
+        <string key="game_over">You lost</string>
+        <string key="game_won">You won</string>
+        <string key="pause">Pause</string>
         <string key="exit">Exit</string>
+        <string key="options">Options</string>
+        <string key="close">Close</string>
+        <string key="volume">Volume</string>
+        <string key="masterVolume">Master Volume</string>
+        <string key="musicVolume">Music Volume</string>
+        <string key="sfxVolume">Effects Volume</string>
+        <string key="no_key">I need a key...</string>
+        <string key="language">Language</string>
+        <string key="E - Pick up">E - Pick up</string>
+        <string key="E - Use">E - Use</string>
+        <string key="E - Get rock">E - Get rock</string>
+        <string key="E - Open">E - Open</string>
+        <string key="E - Read">E - Read</string>
+        <string key="resume">Resume</string>
+        <string key="spanish">Spanish</string>
+        <string key="english">English</string>
     </lang>
 </main>
-

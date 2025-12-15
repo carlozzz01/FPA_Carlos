@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 149717437576217238}
   _handle: {fileID: 7137720473230259794}
+  <ContextMessage>k__BackingField: {fileID: 11400000, guid: 3694225625ccdee41a4208630965bcd6, type: 2}
   _itemID: ingot
 --- !u!114 &7740531678617982125
 MonoBehaviour:

@@ -8,6 +8,7 @@ public class PlayerInteraction : MonoBehaviour
     [Header("References")]
     [SerializeField] private Player _player;
     [SerializeField] private Image _uiIndicator;
+    [SerializeField] private Image _launchIndicator;
     [SerializeField] private Transform _rigidbodyHolder;
 
     [Header("Configuration")]
@@ -25,6 +26,9 @@ public class PlayerInteraction : MonoBehaviour
 
     public Transform RigidbodyHolder => _rigidbodyHolder;
     public bool IsHoldingPickable => _isHoldingRigidboy;
+
+    public static Action<ContextMessageSO> OnContextGiven;
+    public static Action OnContextLost;
 
     private void OnDrawGizmos()
     {
@@ -91,6 +95,8 @@ public class PlayerInteraction : MonoBehaviour
         currentInteractable = null;
 
         _isHoldingRigidboy = false;
+
+        _launchIndicator.fillAmount = 0;
     }
 
     private void ChargeLaunch()
@@ -98,6 +104,8 @@ public class PlayerInteraction : MonoBehaviour
         _launchForce += Time.deltaTime * _launchForceGain;
 
         _launchForce = Mathf.Min(_launchForce, _maxLaunchForce);
+
+        _launchIndicator.fillAmount = _launchForce / _maxLaunchForce;
     }
 
     private void Interact()
@@ -116,6 +124,7 @@ public class PlayerInteraction : MonoBehaviour
             else
             {
                 _isHoldingRigidboy = true;
+                OnContextLost?.Invoke();
             }
         }
     }
@@ -128,20 +137,22 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(_player.Head.position, _player.Head.forward, out hit, _range, _whatIsInteractable) && hit.collider.TryGetComponent(out Interactable interactable))
         {
-            // Debug.Log("Interactable found");
-
             if (currentInteractable == null)
             {
                 _uiIndicator.gameObject.SetActive(true);
             }
 
             currentInteractable = interactable;
+
+            if (currentInteractable.ContextMessage != null) OnContextGiven?.Invoke(currentInteractable.ContextMessage);
         }
-        else if (currentInteractable != null)
+        else
         {
             if (currentInteractable != null)
             {
                 _uiIndicator.gameObject.SetActive(false);
+
+                OnContextLost?.Invoke();
             }
 
             currentInteractable = null;

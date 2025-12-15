@@ -9,6 +9,7 @@ public class Interactable : MonoBehaviour
     [Header("Components")]
     [SerializeField] protected Collider _collider;
     [SerializeField] protected Transform _handle;
+    [field: SerializeField] public ContextMessageSO ContextMessage { get; private set; }
 
     public Transform Handle => _handle;
 
@@ -20,10 +21,6 @@ public class Interactable : MonoBehaviour
     private void Start()
     {
     }
-
-    // public virtual void Interact()
-    // {
-    // }
 
     public virtual void Interact(PlayerInteraction player)
     {

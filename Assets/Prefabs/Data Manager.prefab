@@ -52,6 +52,9 @@ MonoBehaviour:
     - id: bellows_fixed
       description: fuelle arreglado? necesita tener mango de fuelle en inventario
       _isConditionMet: 0
+    - id: molten_metal
+      description: fuelle arreglado? necesita tener mango de fuelle en inventario
+      _isConditionMet: 0
     _gameItems:
     - _id: key_mould
       _description: molde para forjar una llave
@@ -59,5 +62,7 @@ MonoBehaviour:
       _description: mango para usar el fuelle de la forja
     - _id: ingot
       _description: lingote de metal
+    - _id: key
+      _description: llave
   _fileName: data.dat
   _dataPath: 

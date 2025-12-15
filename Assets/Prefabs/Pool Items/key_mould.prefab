@@ -49,8 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ed9afdd6a5f674ca81dcec6f93be93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 0}
+  _collider: {fileID: 4401744193939789991}
   _handle: {fileID: 3757820914759563389}
+  <ContextMessage>k__BackingField: {fileID: 11400000, guid: 3694225625ccdee41a4208630965bcd6, type: 2}
   _itemID: key_mould
 --- !u!114 &8273646450273971187
 MonoBehaviour:

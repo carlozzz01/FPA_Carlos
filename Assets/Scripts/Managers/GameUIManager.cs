@@ -47,7 +47,7 @@ namespace Managers
         private void OnEnable()
         {
             GameManager.OnGamePaused += EnablePauseMenu;
-            GameManager.OnGameWon += () => DisplayGameWon(true);
+            GameManager.OnGameWon += () => ShowGameWon(true);
         }
 
         private void OnDisable()
@@ -186,12 +186,6 @@ namespace Managers
             _victory.alpha = goalAlpha;
             _victory.interactable = value;
             _victory.blocksRaycasts = value;
-
-            if (value)
-            {
-                EventSystem.current.SetSelectedGameObject(_replayButton.gameObject);
-                InputController.Instance.EnableMouse(true);
-            }
         }
 
         /// <summary>
@@ -203,6 +197,7 @@ namespace Managers
             _pause.alpha = state ? 1 : 0f;
             _pause.blocksRaycasts = state;
             _pause.interactable = state;
+            InputController.Instance.EnableMouse(state);
         }
     }
 

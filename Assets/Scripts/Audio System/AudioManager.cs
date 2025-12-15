@@ -80,13 +80,13 @@ namespace Managers
             SetMasterVolume(masterVolumeSaved ? masterVolume : 1);
 
             bool musicVolumeSaved = DataManager.Instance.TryGetFloat(_musicVolumeKey, out float musicVolume);
-            SetMasterVolume(musicVolumeSaved ? musicVolume : 1);
+            SetMusicVolume(musicVolumeSaved ? musicVolume : 1);
 
             bool effectsVolumeSaved = DataManager.Instance.TryGetFloat(_effectsVolumeKey, out float effectsVolume);
-            SetMasterVolume(effectsVolumeSaved ? effectsVolume : 1);
+            SetEffectsVolume(effectsVolumeSaved ? effectsVolume : 1);
 
             bool uiVolumeSaved = DataManager.Instance.TryGetFloat(_uiVolumeKey, out float uiVolume);
-            SetMasterVolume(uiVolumeSaved ? uiVolume : 1);
+            SetUIVolume(uiVolumeSaved ? uiVolume : 1);
         }
 
         #endregion

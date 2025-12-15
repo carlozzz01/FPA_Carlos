@@ -8,13 +8,13 @@ public class Interactable_Reaction : Interactable
     [SerializeField] private ReactionContainer _defaultReactions;
     [SerializeField] private List<ReactionContainer> _reactionContainers;
 
+
     [Header("Debug")]
     private bool _isReacting;
     private Queue<Reaction> _reactionQueue = new Queue<Reaction>();
 
     private void Start()
     {
-        // _collider.isTrigger = _interactOnTriggerEnter;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,11 +35,15 @@ public class Interactable_Reaction : Interactable
             {
                 QueueReactions(reactionChain);
 
+                NextReaction();
+
                 conditionMet = true;
 
                 break;
             }
         }
+
+        if (_defaultReactions == null || !_defaultReactions.Usable) return;
 
         if (!conditionMet && _defaultReactions.ReactOnTriggerEnter) QueueReactions(_defaultReactions);
 
@@ -53,8 +57,6 @@ public class Interactable_Reaction : Interactable
     {
         if (!_isReacting)
         {
-            Debug.Log("Interact");
-
             _isReacting = true;
 
             bool reactionAchieved = false;
@@ -62,24 +64,26 @@ public class Interactable_Reaction : Interactable
             foreach (ReactionContainer reactionChain in _reactionContainers)
             {
                 bool conditionsMet = true;
-                
+
                 foreach (ReactionDecision item in reactionChain.Decisions)
                 {
                     if (item.CheckDecision())
                     {
-                        // Debug.Log($"Is decision {item.name} met? {conditionsMet}");
+
                     }
                     else
                     {
                         conditionsMet = false;
                     }
-
-                    Debug.Log($"Is decision {item.name} met? {conditionsMet}");
                 }
 
                 if (conditionsMet && reactionChain.Usable)
                 {
+                    Debug.Log("decision true");
+
                     QueueReactions(reactionChain);
+
+                    NextReaction();
 
                     reactionAchieved = true;
 
@@ -87,8 +91,15 @@ public class Interactable_Reaction : Interactable
                 }
             }
 
-            if (!reactionAchieved) QueueReactions(_defaultReactions);
+            if (reactionAchieved) return;
 
+            if (_defaultReactions == null || !_defaultReactions.Usable)
+            {
+                _isReacting = false;
+                return;
+            }
+
+            QueueReactions(_defaultReactions);
             NextReaction();
         }
     }

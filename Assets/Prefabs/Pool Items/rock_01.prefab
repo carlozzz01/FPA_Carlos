@@ -114,7 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 1799923929347268549}
-  _handle: {fileID: 0}
+  _handle: {fileID: 4273702077629635582}
+  <ContextMessage>k__BackingField: {fileID: 11400000, guid: 3694225625ccdee41a4208630965bcd6, type: 2}
   _rigidbody: {fileID: 2665289652323244295}
   _model: {fileID: 4273702077629635582}
   _maxFollowDelta: 0.5

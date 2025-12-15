@@ -1,17 +1,13 @@
 <main>
     <lang>
-        <string key="test01">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce turpis nunc, aliquam ac tempor sed, vehicula quis risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis dapibus tristique nisl, ac elementum urna varius quis. Nulla et lorem fringilla, sodales nibh ac, tempor nisi.</string>
+        <string key="test01">Lorem ipsum dolor sit amet.</string>
         <string key="scroll_open_01">A mi hijo,
-Hoy cumples tus [color=#DAA520FF]dieciséis inviernos[/color]. Has despertado donde debes, bajo el cielo y sobre la tierra fría.
-Como dicta la tradición del hierro y la sangre, hoy debes probar que tienes mano para el oficio. No basta con haber crecido… hay que templarse.
-Si quieres volver a [color=#DAA520FF]cruzar esta puerta[/color], empieza por lo primero:
+Hoy cumples tus [color=#DAA520FF]dieciséis inviernos[/color].
+Como dicta la tradición, hoy debes probar que tienes mano para el oficio.
+Si quieres volver a cruzar esta puerta, empieza por lo primero:
 [color=#B22222]Que la fragua respire.[/color]
-El [color=#DAA520FF]horno está dormido[/color]. Para despertarlo, busca el carbón. Dejé algo guardado en [color=#DAA520FF]tres barriles pequeños[/color] por el jardín. No intentes romperlos con las manos, sino aprovechar su [color=#DAA520FF]fragilidad[/color].
-Cuando lo consigas, [color=#DAA520FF]echa el carbón en el horno[/color] y [color=#DAA520FF]pon en marcha el fuelle[/color].
-Las herramientas no hablan, pero enseñan al que observa.
-Recuerda bien esto, como lo hizo tu abuelo y el padre de su padre:
-[color=#DAA520FF]Vale más la maña que la fuerza.[/color]
-Si no sabes valerte por ti mismo, [color=#800000]no entres.[/color]
+La hoguera está dormida. Para despertarla, busca el carbón, guardado en tres barriles pequeños por el jardín.
+Apañatelas tu sólo y demuestrame que sabes valerte por ti mismo.
 - Tu padre
         </string>
         <string key="scroll_open_02">No todo lo útil brilla ni todo lo largo es lanza.
@@ -25,23 +21,17 @@ sino para dar aliento al fuego.
         </string>
         <string key="bellows_default">Hmmm... Parece que al fuelle le falta el mango para que funcione.</string>
         <string key="scroll_open_03">Si has llegado hasta aquí, ya sabes que no estás solo.
-
-Hay un hombre grande rondando estos pasillos. [color=#B22222]Si te ve, te seguirá. Y si te alcanza, no llegarás más lejos.[/color]
-
-Pero no todo puede contigo. [color=#DAA520FF]Cajas, rincones y sombras serán tus mejores aliados.[/color]
+Hay un hombre grande rondando estos pasillos. Si te ve, te seguirá. Y si te alcanza, no llegarás más lejos.
+Rincones y sombras serán tus mejores aliados.
 Haz ruido lejos de ti, y caminará hacia el eco.
 
 Ahora, abre bien los ojos.
-
-[color=#DAA520FF]Aquel árbol guarda más que savia.[/color]
+Aquel árbol guarda más que frutos.
 Mira hacia lo alto…
-
-[color=#DAA520FF]Lo que buscas descansa entre las ramas,[/color] pero no se baja con manos:
-[color=#708090]hazlo caer con una piedra bien lanzada.[/color]
+Lo que buscas descansa entre las ramas, pero no se baja con manos:
+hazlo caer con una piedra bien lanzada.
 
 Solo entonces podrás encender lo que falta.
-
-Camina con cuidado.
         </string>
         <string key="title">Prueba de fuego</string>
         <string key="start">Empezar</string>
@@ -57,6 +47,14 @@ Camina con cuidado.
         <string key="musicVolume">Volumen de Música</string>
         <string key="sfxVolume">Volumen de Efectos</string>
         <string key="no_key">Necesito una llave...</string>
+        <string key="language">Idioma</string>
+        <string key="E - Pick up">E - Coger</string>
+        <string key="E - Use">E - Usar</string>
+        <string key="E - Get rock">E - Coger piedra</string>
+        <string key="E - Open">E - Abrir</string>
+        <string key="E - Read">E - Leer</string>
+        <string key="resume">Continuar</string>
+        <string key="spanish">Español</string>
+        <string key="english">Inglés</string>
     </lang>
 </main>
-

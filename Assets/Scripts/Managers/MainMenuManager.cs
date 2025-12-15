@@ -19,7 +19,7 @@ namespace Managers
         /// </summary>
         public void Play()
         {
-            SceneController.Instance.LoadScene("Game");
+            SceneController.Instance.LoadScene("game", true);
         }
 
         /// <summary>
@@ -55,6 +55,11 @@ namespace Managers
         public void SetMusicVolume(float sliderValue)
         {
             AudioManager.Instance.SetMusicVolume(sliderValue);
+        }
+
+        public void SetLanguage(string lang)
+        {
+            TranslationManager.Instance.ChangeLanguage(lang);
         }
     }
 }

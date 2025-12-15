@@ -9,12 +9,12 @@ namespace Managers
         [Header("Components")]
         [SerializeField] private GameObject _playerActionsGO;
         [SerializeField] private GameObject _uiActionsGO;
-        // [SerializeField] private GameObject _gameActionsGO;
+        [SerializeField] private GameObject _gameActionsGO;
 
         private PlayerInputs _inputs;
         private IPlayerActions _playerActions;
         private IUIActions _uiActions;
-        // private IGameActions _gameActions;
+        private IGameActions _gameActions;
 
         private static InputController _instance;
         public static InputController Instance => _instance;
@@ -61,22 +61,25 @@ namespace Managers
         {
             if (_playerActionsGO != null) _playerActions = _playerActionsGO.GetComponent<IPlayerActions>();
             if (_uiActionsGO != null) _uiActions = _uiActionsGO.GetComponent<IUIActions>();
-            // if (_gameActionsGO != null) _gameActions = _gameActionsGO.GetComponent<IGameActions>();
+            if (_gameActionsGO != null) _gameActions = _gameActionsGO.GetComponent<IGameActions>();
 
             if (_playerActions != null)
             {
                 _inputs.Player.AddCallbacks(_playerActions);
+                _inputs.Player.Enable();
             }
 
             if (_uiActions != null)
             {
                 _inputs.UI.AddCallbacks(_uiActions);
+                _inputs.UI.Enable();
             }
 
-            // if (_gameActions != null)
-            // {
-            // _inputs.Game.AddCallbacks(_gameActions);
-            // }
+            if (_gameActions != null)
+            {
+                _inputs.Game.AddCallbacks(_gameActions);
+                _inputs.Game.Enable();
+            }
         }
 
         /// <summary>
@@ -135,7 +138,7 @@ namespace Managers
         /// <summary>
         /// Directly deactivates player inputs
         /// </summary>
-        private void DisablePlayerInputs()
+        public void DisablePlayerInputs()
         {
             EnablePlayerInputs(false);
         }

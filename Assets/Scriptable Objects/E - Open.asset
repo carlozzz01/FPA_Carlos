@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5742b50f8476364da0bb788b416b314, type: 3}
-  m_Name: key in inventory
+  m_Script: {fileID: 11500000, guid: 1b4645fd384722740aa822c462f62986, type: 3}
+  m_Name: E - Open
   m_EditorClassIdentifier: 
-  _itemID: key
+  <Message>k__BackingField: E - Open

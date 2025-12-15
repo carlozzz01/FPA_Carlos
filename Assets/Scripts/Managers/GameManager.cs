@@ -61,6 +61,10 @@ public class GameManager : MonoBehaviour, IGameActions
         OnGameWon?.Invoke();
 
         AudioManager.Instance.PlayMusic("complete");
+
+        InputController.Instance.EnableMouse(true);
+
+        InputController.Instance.DisablePlayerInputs();
     }
 
     /// <summary>
@@ -80,6 +84,14 @@ public class GameManager : MonoBehaviour, IGameActions
     }
 
     /// <summary>
+    /// Reads Cheat input
+    /// </summary>
+    /// <param name="context"></param>
+    public void OnCheat(InputAction.CallbackContext context)
+    {
+    }
+
+    /// <summary>
     /// Pauses game
     /// </summary>
     /// <param name="isPaused"></param>
@@ -89,10 +101,20 @@ public class GameManager : MonoBehaviour, IGameActions
     }
 
     /// <summary>
-    /// Reads Cheat input
+    /// Pause game and invokes events
     /// </summary>
-    /// <param name="context"></param>
-    public void OnCheat(InputAction.CallbackContext context)
+    /// <param name="isPaused"></param>
+    public void PauseGameWithNotify(bool isPaused)
     {
+        _isPaused = isPaused;
+
+        OnGamePaused?.Invoke(isPaused);
+
+        PauseGame(isPaused);
+    }
+
+    public void RequestLevel(string levelName)
+    {
+        SceneController.Instance.LoadScene(levelName, true);
     }
 }

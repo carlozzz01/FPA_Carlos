@@ -65,12 +65,17 @@ public class Interactable_Rigidbody : Interactable
             if (broke)
             {
                 // Deactivate the model, play vfx, and call break event
-
-                _model.gameObject.SetActive(false);
-
                 _breakEffect.Play();
 
                 OnBreak?.Invoke();
+
+                var collider = GetComponent<Collider>();
+
+                collider.enabled = false;
+
+                _model.gameObject.SetActive(false);
+
+                Destroy(gameObject, 1f);
             }
         }
     }
@@ -96,8 +101,6 @@ public class Interactable_Rigidbody : Interactable
 
         _rigidbody.useGravity = false;
 
-        // _rigidbody.linearDamping = 10;
-
         _rigidbody.linearVelocity = Vector3.zero;
     }
 
@@ -108,8 +111,6 @@ public class Interactable_Rigidbody : Interactable
         _rigidbody.useGravity = true;
 
         _rigidbody.WakeUp();
-
-        // _rigidbody.linearDamping = _initialDamping;
 
         _rigidbody.linearVelocity = Vector3.zero;
     }
