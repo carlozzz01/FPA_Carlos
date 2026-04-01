@@ -118,11 +118,15 @@ MonoBehaviour:
   <ContextMessage>k__BackingField: {fileID: 11400000, guid: 3694225625ccdee41a4208630965bcd6, type: 2}
   _rigidbody: {fileID: 2665289652323244295}
   _model: {fileID: 4273702077629635582}
-  _maxFollowDelta: 0.5
+  _maxFollowDelta: 30
   _turningRate: 30
   _isBreakable: 0
   _breakVelocity: 1
   _breakEffect: {fileID: 1062829035649641979}
+  _pickupSound:
+    id: 
+    clip: {fileID: 8300000, guid: 68a3c984b637a3d4d9f3f95359f114f0, type: 3}
+    volume: 1
   OnBreak:
     m_PersistentCalls:
       m_Calls: []

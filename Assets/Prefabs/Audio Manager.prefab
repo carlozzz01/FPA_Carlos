@@ -72,8 +72,8 @@ MonoBehaviour:
   _sfxAudioSource: {fileID: 1725748704161352276}
   _uiList: []
   _uiAudioSource: {fileID: 6117415011445515580}
-  _fadeTime: 2
-  _pitchTime: 1
+  _fadeTime: 0.75
+  _pitchTime: 0.74
   _pitchSlow: 0.06
   _masterVolumeKey: masterVolume
   _masterVolume: 1
@@ -259,7 +259,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

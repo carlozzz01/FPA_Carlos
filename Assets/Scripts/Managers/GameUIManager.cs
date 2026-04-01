@@ -28,6 +28,7 @@ namespace Managers
         [SerializeField] private float _damageFlashDurationIn;
         [SerializeField] private float _damageFlashDurationOut;
         [SerializeField] private CanvasGroup _damageFlash;
+        [SerializeField] private GameAudio _damageSound;
 
         private static GameUIManager _instance;
         public static GameUIManager Instance => _instance;
@@ -85,6 +86,8 @@ namespace Managers
             }
 
             _damageFlash.alpha = 1;
+
+            AudioSource.PlayClipAtPoint(_damageSound.clip, GameManager.Instance.Viking.transform.position, _damageSound.volume * AudioManager.Instance.SFXVolume);
 
             timer = 0;
 

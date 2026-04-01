@@ -20,6 +20,7 @@ public class InspectorManager : MonoBehaviour
 
     private Coroutine _fadeCoroutine;
     private float _fadeTimer;
+    private bool _isFading;
 
     private static InspectorManager _instance;
     public static InspectorManager Instance => _instance;
@@ -48,8 +49,9 @@ public class InspectorManager : MonoBehaviour
     {
         SelectNewItem(itemID);
 
-        if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
+        if (_isFading) return;
 
+        if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
         _fadeCoroutine = StartCoroutine(DisplayItem());
 
         OnInspectStarted?.Invoke();
@@ -66,8 +68,9 @@ public class InspectorManager : MonoBehaviour
 
     public void StopInspect()
     {
-        if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
+        if (_isFading) return;
 
+        if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
         _fadeCoroutine = StartCoroutine(HideItem());
 
         OnInspectCanceled?.Invoke();
@@ -75,6 +78,8 @@ public class InspectorManager : MonoBehaviour
 
     private IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float goalAlpha)
     {
+        _isFading = true;
+
         float startingAlpha = canvasGroup.alpha;
 
         _fadeTimer = _fadeDuration - _fadeTimer;
@@ -91,6 +96,8 @@ public class InspectorManager : MonoBehaviour
         canvasGroup.alpha = goalAlpha;
 
         _fadeTimer = _fadeDuration;
+
+        _isFading = false;
     }
 
     private IEnumerator DisplayItem()
@@ -111,6 +118,10 @@ public class InspectorManager : MonoBehaviour
     {
         yield return StartCoroutine(FadeCanvasGroup(_mainCanvasGroup, 0));
 
-        if (_currentItem.HasText) _textCanvasGroup.alpha = 0;
+        if (_currentItem.HasText)
+        {
+            _textCanvasGroup.alpha = 0;
+            _text.text = "";
+        } 
     }
 }

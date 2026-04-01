@@ -10554,6 +10554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 832809132}
   _uiIndicator: {fileID: 0}
+  _launchIndicator: {fileID: 0}
   _rigidbodyHolder: {fileID: 0}
   _whatIsInteractable:
     serializedVersion: 2

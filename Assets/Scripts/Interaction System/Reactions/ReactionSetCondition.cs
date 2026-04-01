@@ -8,6 +8,6 @@ public class ReactionSetCondition : Reaction
 
     protected override void React()
     {
-        DataManager.Instance.Data.GetCondition(_conditionID).SetState(_value);
+        DataManager.Instance.SetCondition(_conditionID, _value);
     }
 }

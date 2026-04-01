@@ -158,8 +158,6 @@ namespace Managers
 
             while (timer < time)
             {
-                Debug.Log(_fade.alpha);
-
                 _fade.alpha = Mathf.Lerp(currentAlpha, goalAlpha, timer / time);
 
                 timer += Time.deltaTime;

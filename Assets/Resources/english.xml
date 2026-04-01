@@ -1,7 +1,8 @@
 <main>
     <lang>
         <string key="test01">Lorem ipsum dolor sit amet.</string>
-
+        <string key="intro">Hugh... So it begins...</string>
+        <string key="door-locked">It's locked.</string>
         <string key="scroll_open_01">To my son,
 Today you complete your [color=#DAA520FF]sixteen winters[/color].
 As tradition dictates, today you must prove you have a hand for the craft.
@@ -22,7 +23,7 @@ Look closely. One of them was not born to wound,
 but to give breath to the fire.
         </string>
 
-        <string key="bellows_default">Hmmm... It seems the bellows is missing the handle to work.</string>
+        <string key="bellows_default">It's missing the handle.</string>
 
         <string key="scroll_open_03">If you’ve made it this far, you already know you’re not alone.
 There is a large man wandering these halls. If he sees you, he will follow you. And if he reaches you, you won’t get any farther.
@@ -58,8 +59,17 @@ Only then will you be able to ignite what is missing.
         <string key="E - Get rock">E - Get rock</string>
         <string key="E - Open">E - Open</string>
         <string key="E - Read">E - Read</string>
+        <string key="H - Hint">H - Hint</string>
         <string key="resume">Resume</string>
         <string key="spanish">Spanish</string>
         <string key="english">English</string>
+        <string key="objectives-key">Q - Objectives</string>
+        <string key="objective-get-inside">Come inside.</string>
+        <string key="objective-fix-bellows">Find the bellow's handle and fix it.</string>
+        <string key="objective-start-fire">Start the forge's fire.</string>
+        <string key="objective-get-cauldron">Find the cauldron.</string>
+        <string key="objective-get-key-mould">Find the key mould.</string>
+        <string key="objective-forge-key">Forge a new house key.</string>
+        <string key="objective-melt-iron">Melt an iron ingot.</string>
     </lang>
 </main>

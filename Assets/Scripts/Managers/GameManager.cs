@@ -91,6 +91,21 @@ public class GameManager : MonoBehaviour, IGameActions
     {
     }
 
+    public void OnHint(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+
+        var hints = ObjectivesManager.Instance.GetActiveHints();
+        HintsManager.Instance.ShowHints(hints);
+    }
+
+    public void OnObjectives(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+
+        ObjectivesManager.Instance.Toggle();
+    }
+
     /// <summary>
     /// Pauses game
     /// </summary>
@@ -117,4 +132,6 @@ public class GameManager : MonoBehaviour, IGameActions
     {
         SceneController.Instance.LoadScene(levelName, true);
     }
+
+
 }

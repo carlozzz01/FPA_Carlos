@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,7 @@ public class Interactable_Rigidbody : Interactable
     [SerializeField] private bool _isBreakable;
     [HideInInspector][SerializeField] private float _breakVelocity;
     [HideInInspector][SerializeField] private ParticleSystem _breakEffect;
+    [SerializeField] private GameAudio _pickupSound;
 
     private Transform _holdPosition;
     // private float _initialDamping;
@@ -30,15 +32,14 @@ public class Interactable_Rigidbody : Interactable
         // _initialDamping = _rigidbody.linearDamping;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_holdPosition == null) return;
 
         _rigidbody.WakeUp();
 
-        _rigidbody.position = Vector3.MoveTowards(_rigidbody.position, _holdPosition.position, _maxFollowDelta);
-
-        _rigidbody.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.up), _turningRate * Time.deltaTime);
+        _rigidbody.MovePosition(Vector3.MoveTowards(_rigidbody.position, _holdPosition.position, _maxFollowDelta * Time.fixedDeltaTime));
+        _rigidbody.MoveRotation(Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(Vector3.up), _turningRate * Time.fixedDeltaTime));
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -102,6 +103,8 @@ public class Interactable_Rigidbody : Interactable
         _rigidbody.useGravity = false;
 
         _rigidbody.linearVelocity = Vector3.zero;
+
+        AudioSource.PlayClipAtPoint(_pickupSound.clip, transform.position, _pickupSound.volume * AudioManager.Instance.SFXVolume);
     }
 
     public void Drop()

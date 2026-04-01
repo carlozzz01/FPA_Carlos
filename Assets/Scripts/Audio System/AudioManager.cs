@@ -220,10 +220,13 @@ namespace Managers
         /// <param name="id"></param>
         public void PlayMusic(string id)
         {
+            
             for (int i = 0; i < _musicList.Length; i++)
             {
                 if (_musicList[i].id == id)
                 {
+                    if (_currentMusicClip.id == _musicList[i].id) return;
+                     
                     PlayMusic(i);
                     return;
                 }

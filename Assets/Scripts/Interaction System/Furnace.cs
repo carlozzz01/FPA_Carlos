@@ -16,7 +16,7 @@ public class Furnace : MonoBehaviour
         {
             if (entity.ID == _coalID)
             {
-                DataManager.Instance.Data.TrySetCondition(_furnaceCondition, true);
+                DataManager.Instance.SetCondition(_furnaceCondition, true);
 
                 _OnIgnite?.Invoke();
             }

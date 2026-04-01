@@ -10,6 +10,7 @@ public class Player : MonoBehaviour, IPlayerActions
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private CapsuleCollider _collider;
     [SerializeField] private Transform _head;
+    [SerializeField] private Animator _introAnimator;
     public Rigidbody Rigidbody => _rigidbody;
     public CapsuleCollider Collider => _collider;
     public Transform Head => _head;
@@ -21,9 +22,11 @@ public class Player : MonoBehaviour, IPlayerActions
     public bool HoldToCrouch => _holdToCrouch;
     public bool HoldToSprint => _holdToSprint;
 
+
     [Header("State")]
     public bool isGrounded;
     public PlayerState state { get; private set; }
+    [SerializeField] private bool _isActive;
 
     public Action<InputAction.CallbackContext> OnCrouchInput;
     public Action<InputAction.CallbackContext> OnInteractInput;
@@ -64,6 +67,7 @@ public class Player : MonoBehaviour, IPlayerActions
 
     public void OnCrouch(InputAction.CallbackContext context)
     {
+        if (!_isActive) return;
         if (state == PlayerState.Inspect) return;
 
         if (state != PlayerState.Sprint)
@@ -93,6 +97,7 @@ public class Player : MonoBehaviour, IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (!_isActive) return;
         if (state == PlayerState.Inspect)
         {
             if (context.started) InspectorManager.Instance.StopInspect();
@@ -106,11 +111,13 @@ public class Player : MonoBehaviour, IPlayerActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (!_isActive) return;
         if (state == PlayerState.Inspect) return;
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
+        if (!_isActive) return;
         if (state == PlayerState.Inspect) return;
 
         OnLookInput?.Invoke(context);
@@ -118,6 +125,7 @@ public class Player : MonoBehaviour, IPlayerActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!_isActive) return;
         if (state == PlayerState.Inspect) return;
 
         OnMoveInput?.Invoke(context);
@@ -125,6 +133,7 @@ public class Player : MonoBehaviour, IPlayerActions
 
     public void OnSprint(InputAction.CallbackContext context)
     {
+        if (!_isActive) return;
         if (state == PlayerState.Inspect) return;
 
         if (state != PlayerState.Crouch)
@@ -154,6 +163,7 @@ public class Player : MonoBehaviour, IPlayerActions
 
     public void OnShoot(InputAction.CallbackContext context)
     {
+        if (!_isActive) return;
         if (state == PlayerState.Inspect) return;
 
         OnShootInput?.Invoke(context);
@@ -208,8 +218,16 @@ public class Player : MonoBehaviour, IPlayerActions
 
         // GameUIManager.Instance.TriggerDamageFlash();
     }
+
+    public void ActivateSelf()
+    {
+        _isActive = true;
+        state = PlayerState.Walk;
+        _introAnimator.enabled = false;
+    }
 }
 
+[Serializable]
 public enum PlayerState
 {
     Walk,

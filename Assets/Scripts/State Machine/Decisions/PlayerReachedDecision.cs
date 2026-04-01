@@ -5,11 +5,8 @@ public class PlayerReachedDecision : Decision
 {
     public override bool Decide(StateMachineController controller)
     {
-        return Arrive(controller);
-    }
-
-    private bool Arrive(StateMachineController controller)
-    {
-        return controller.IsCloseToPlayer();
+        bool reached = controller.IsCloseToPlayer();
+        Debug.Log($"PlayerReached: {reached}");
+        return reached;
     }
 }

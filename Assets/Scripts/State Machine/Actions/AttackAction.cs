@@ -10,9 +10,11 @@ public class AttackAction : StateAction
 
     private void Attack(StateMachineController controller)
     {
-        controller.StopMoving();
-        
         Debug.Log("Attack player");
+
+        controller.StopMoving();
+
+        controller.SetHitReceiverActive(false);
 
         GameManager.Instance.GameOver();
     }

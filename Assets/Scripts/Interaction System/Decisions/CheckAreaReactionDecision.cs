@@ -35,7 +35,6 @@ public class CheckAreaReactionDecision : ReactionDecision
                 }
             }
 
-            Debug.Log($"{_itemID} found?: {amountFound >= _amountNeeded}");
             return amountFound >= _amountNeeded;
         }
         else

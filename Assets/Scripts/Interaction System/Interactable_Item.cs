@@ -4,6 +4,7 @@ using Managers;
 public class Interactable_Item : Interactable
 {
     [SerializeField] private string _itemID;
+    [SerializeField] private GameAudio _pickupSound;
 
     public override void Interact(PlayerInteraction player)
     {
@@ -11,7 +12,8 @@ public class Interactable_Item : Interactable
         {
             if (InventoryManager.Instance.TryAddItemToInventory(_itemID))
             {
-                // result._isPicked = true;
+                AudioSource.PlayClipAtPoint(_pickupSound.clip, transform.position, _pickupSound.volume * AudioManager.Instance.SFXVolume);
+                
                 gameObject.SetActive(false);
             }
         }

@@ -12,18 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87f9caa29937374a9f9eafe5ea04983, type: 3}
   m_Name: Chase State
   m_EditorClassIdentifier: 
-  _startActions: []
+  _startActions:
+  - {fileID: 11400000, guid: 96ec020936d77774aabd5c050b4b8c79, type: 2}
+  - {fileID: 11400000, guid: d832c0e5e41b6214c9774308625e8bcc, type: 2}
   _actions:
   - {fileID: 11400000, guid: 327af5c4678a7f642bfc5194533bdd85, type: 2}
   - {fileID: 11400000, guid: 58d8f9d7a0e935347a8d4b106f6b7124, type: 2}
+  - {fileID: 11400000, guid: 61b9a3de8390a4549b458824f6d3493d, type: 2}
   _endActions: []
   _transitions:
   - _decision: {fileID: 11400000, guid: a77308ba6cd1ce543b5616156448d861, type: 2}
     _stateOnTrue: {fileID: 11400000, guid: 6ed86f372f5fa094aaf5aca7a5104d32, type: 2}
     _stateOnFalse: {fileID: 0}
-  - _decision: {fileID: 11400000, guid: 4332317858186064f9d2a236c9b0c5c9, type: 2}
-    _stateOnTrue: {fileID: 11400000}
-    _stateOnFalse: {fileID: 11400000, guid: 84d1cc62f26f04e4186c24d01e8da914, type: 2}
   - _decision: {fileID: 11400000, guid: 28ab6b5bf84da3a45a867268059075d3, type: 2}
     _stateOnTrue: {fileID: 11400000, guid: 84d1cc62f26f04e4186c24d01e8da914, type: 2}
     _stateOnFalse: {fileID: 0}
+  - _decision: {fileID: 11400000, guid: 072596fed3ae96a4ca8b4f45c61dc6db, type: 2}
+    _stateOnTrue: {fileID: 11400000, guid: 84d1cc62f26f04e4186c24d01e8da914, type: 2}
+    _stateOnFalse: {fileID: 0}
+  - _decision: {fileID: 11400000, guid: f9d85369955ec164eb13c55ed11264c3, type: 2}
+    _stateOnTrue: {fileID: 0}
+    _stateOnFalse: {fileID: 11400000, guid: 84d1cc62f26f04e4186c24d01e8da914, type: 2}

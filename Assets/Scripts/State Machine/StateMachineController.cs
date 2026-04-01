@@ -13,6 +13,8 @@ public class StateMachineController : MonoBehaviour
     [SerializeField] private NavMeshAgent _navMeshAgent;
     [SerializeField] private Transform _eyes;
     [SerializeField] private ParticleSystem _hitParticles;
+    [SerializeField] private HitReceiver _hitReceiver;
+
     private Transform _NextWaypoint => _waypoints[_nextWaypointIndex];
     public Vector3 Velocity => _navMeshAgent.velocity;
 
@@ -37,6 +39,10 @@ public class StateMachineController : MonoBehaviour
     public List<Vector3> HeardSounds => _heardSounds;
     public float StateTimer => _stateTimer;
     public Vector3 Destination => _navMeshAgent.destination;
+
+
+
+
 
     private void OnDrawGizmos()
     {
@@ -99,6 +105,11 @@ public class StateMachineController : MonoBehaviour
 
             _currentState.StartState(this);
         }
+    }
+
+    public void SetHitReceiverActive(bool active)
+    {
+        _hitReceiver.enabled = active;
     }
 
     /// <summary>
@@ -187,7 +198,11 @@ public class StateMachineController : MonoBehaviour
     /// <returns></returns>
     public bool IsCloseToPlayer()
     {
-        return _target != null && _target.CompareTag("Player") && _navMeshAgent.remainingDistance <= _stats.MinAttackRange;
+        if (_target == null || !_target.CompareTag("Player")) return false;
+
+        float realDistance = Vector3.Distance(transform.position, _target.position);
+
+        return realDistance <= _stats.MinAttackRange;
     }
 
     /// <summary>
@@ -361,13 +376,6 @@ public class StateMachineController : MonoBehaviour
         TransitionToState(state);
 
         _hitParticles.Play();
-
-        // if (!_firstHit)
-        // {
-        //     _firstHit = true;
-
-        //     PoolManager.Instance.Pull("ingot", _hitParticles.transform.position, Quaternion.identity);
-        // }
     }
 
     /// <summary>

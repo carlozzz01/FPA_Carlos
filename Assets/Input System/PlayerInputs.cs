@@ -928,6 +928,24 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hint"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e58ca0a-a778-4247-b8d5-d048c4fc6a6d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Objectives"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a40d722-a8d1-4050-ab05-0a9a8385f5eb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -961,6 +979,28 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Cheat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1513397e-a319-4744-b5d3-4168164eaeb2"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4dfcc84f-42ad-4589-b578-91be227bb2b0"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Objectives"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1055,6 +1095,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_Pause = m_Game.FindAction("Pause", throwIfNotFound: true);
         m_Game_Cheat = m_Game.FindAction("Cheat", throwIfNotFound: true);
+        m_Game_Hint = m_Game.FindAction("Hint", throwIfNotFound: true);
+        m_Game_Objectives = m_Game.FindAction("Objectives", throwIfNotFound: true);
     }
 
     ~@PlayerInputs()
@@ -1337,12 +1379,16 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private List<IGameActions> m_GameActionsCallbackInterfaces = new List<IGameActions>();
     private readonly InputAction m_Game_Pause;
     private readonly InputAction m_Game_Cheat;
+    private readonly InputAction m_Game_Hint;
+    private readonly InputAction m_Game_Objectives;
     public struct GameActions
     {
         private @PlayerInputs m_Wrapper;
         public GameActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_Game_Pause;
         public InputAction @Cheat => m_Wrapper.m_Game_Cheat;
+        public InputAction @Hint => m_Wrapper.m_Game_Hint;
+        public InputAction @Objectives => m_Wrapper.m_Game_Objectives;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1358,6 +1404,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Cheat.started += instance.OnCheat;
             @Cheat.performed += instance.OnCheat;
             @Cheat.canceled += instance.OnCheat;
+            @Hint.started += instance.OnHint;
+            @Hint.performed += instance.OnHint;
+            @Hint.canceled += instance.OnHint;
+            @Objectives.started += instance.OnObjectives;
+            @Objectives.performed += instance.OnObjectives;
+            @Objectives.canceled += instance.OnObjectives;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -1368,6 +1420,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Cheat.started -= instance.OnCheat;
             @Cheat.performed -= instance.OnCheat;
             @Cheat.canceled -= instance.OnCheat;
+            @Hint.started -= instance.OnHint;
+            @Hint.performed -= instance.OnHint;
+            @Hint.canceled -= instance.OnHint;
+            @Objectives.started -= instance.OnObjectives;
+            @Objectives.performed -= instance.OnObjectives;
+            @Objectives.canceled -= instance.OnObjectives;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -1457,5 +1515,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     {
         void OnPause(InputAction.CallbackContext context);
         void OnCheat(InputAction.CallbackContext context);
+        void OnHint(InputAction.CallbackContext context);
+        void OnObjectives(InputAction.CallbackContext context);
     }
 }

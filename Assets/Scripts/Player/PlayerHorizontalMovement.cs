@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,18 +7,33 @@ public class PlayerHorizontalMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Player _player;
+    [SerializeField] private AudioSource _audioSource;
 
     [Header("Speeds")]
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _crouchSpeed;
     [SerializeField] private float _sprintSpeed;
 
+    [Header("Footsteps")]
+    [SerializeField] private GameAudio[] _footstepSounds;
+    [SerializeField] private float _walkFootstepDistance = 1.5f;
+    [SerializeField] private float _crouchFootstepDistance = 2f;
+    [SerializeField] private float _sprintFootstepDistance = 1f;
+
+    private float _footstepDistance;
+
     private Vector3 _moveInput;
     private float _speed;
+
+    private Vector3 _lastFootstepPosition;
+    private int _lastFootstepIndex = -1;
 
     private void Awake()
     {
         if (_player == null) _player = GetComponent<Player>();
+        if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
+
+        _lastFootstepPosition = transform.position;
     }
 
     private void OnEnable()
@@ -40,6 +56,7 @@ public class PlayerHorizontalMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        CheckFootstep();
     }
 
     /// <summary>
@@ -72,6 +89,38 @@ public class PlayerHorizontalMovement : MonoBehaviour
         }
     }
 
+    private void CheckFootstep()
+    {
+        if (_footstepSounds.Length == 0) return;
+        if (!_player.isGrounded) return;
+
+        Vector3 currentPosition = transform.position;
+        Vector3 horizontalDelta = currentPosition - _lastFootstepPosition;
+        horizontalDelta.y = 0f;
+
+        if (horizontalDelta.magnitude >= _footstepDistance)
+        {
+            PlayFootstep();
+            _lastFootstepPosition = currentPosition;
+        }
+    }
+
+    private void PlayFootstep()
+    {
+        // Evita repetir el mismo sonido dos veces seguidas
+        int index;
+        do
+        {
+            index = UnityEngine.Random.Range(0, _footstepSounds.Length);
+        }
+        while (_footstepSounds.Length > 1 && index == _lastFootstepIndex);
+
+        _lastFootstepIndex = index;
+
+        GameAudio audio = _footstepSounds[index];
+        _audioSource.PlayOneShot(audio.clip, audio.volume * AudioManager.Instance.SFXVolume);
+    }
+
     /// <summary>
     /// Updates the Player's speed depending on it's current state: Walk, Crouch, Sprint
     /// </summary>
@@ -81,15 +130,19 @@ public class PlayerHorizontalMovement : MonoBehaviour
         {
             case PlayerState.Walk:
                 _speed = _walkSpeed;
+                _footstepDistance = _walkFootstepDistance;
                 break;
             case PlayerState.Crouch:
                 _speed = _crouchSpeed;
+                _footstepDistance = _crouchFootstepDistance;
                 break;
             case PlayerState.Sprint:
                 _speed = _sprintSpeed;
+                _footstepDistance = _sprintFootstepDistance;
                 break;
             default:
                 _speed = 0f;
+                _footstepDistance = _walkFootstepDistance;
                 break;
         }
     }

@@ -128,6 +128,8 @@ namespace Managers
             }
 
             condition.SetState(value);
+
+            ObjectivesManager.OnConditionChanged?.Invoke();
         }
 
         /// <summary>

@@ -36,7 +36,7 @@ public static class UIAnimator
     // por ejemplo, con el CanvasGroup debe cuidarse el .interactable y el .blocksRaycasts
     // como el Image no necesita nada después, el after no se define y se pasa como null 
 
-    public static void Fade(CanvasGroup group, bool fadeIn, float duration, bool timeScaled = true, Action onComplete = null)
+    public static void Fade(CanvasGroup group, bool fadeIn, float duration = 0.25f, bool timeScaled = true, Action onComplete = null)
     {
         // este void necesita (bool, float, bool opcional, onComplete opcional, setter, getter, after opcional )
         StartGenericFade(

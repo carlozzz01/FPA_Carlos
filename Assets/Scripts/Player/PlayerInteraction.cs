@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private LayerMask _whatIsInteractable;
     [SerializeField] private float _range;
     [SerializeField] public Interactable currentInteractable { get; private set; }
+    [SerializeField] private GameAudio _throwSound;
 
     [Header("Physics")]
     [SerializeField] private bool _isHoldingRigidboy;
@@ -88,6 +90,8 @@ public class PlayerInteraction : MonoBehaviour
     {
         currentInteractable.Interact(this);
 
+        AudioSource.PlayClipAtPoint(_throwSound.clip, transform.position, _throwSound.volume * AudioManager.Instance.SFXVolume);
+
         Interactable_Rigidbody interactable = currentInteractable as Interactable_Rigidbody;
 
         interactable.Rigidbody.AddForce(_rigidbodyHolder.forward.normalized * _launchForce, ForceMode.Impulse);
@@ -135,7 +139,9 @@ public class PlayerInteraction : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(_player.Head.position, _player.Head.forward, out hit, _range, _whatIsInteractable) && hit.collider.TryGetComponent(out Interactable interactable))
+        bool interactableHit = Physics.Raycast(_player.Head.position, _player.Head.forward, out hit, _range, _whatIsInteractable, QueryTriggerInteraction.Ignore);
+
+        if (interactableHit && hit.collider.TryGetComponent(out Interactable interactable))
         {
             if (currentInteractable == null)
             {

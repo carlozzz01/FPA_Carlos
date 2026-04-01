@@ -9,19 +9,26 @@ public class TextTranslator : MonoBehaviour
 
     private void OnEnable()
     {
-        TranslationManager.OnTextLoaded += AssignText;
+        TranslationManager.OnTextLoaded += SetText;
     }
 
     private void OnDisable()
     {
-        TranslationManager.OnTextLoaded -= AssignText;
+        TranslationManager.OnTextLoaded -= SetText;
     }
 
     /// <summary>
     /// Assings text from TranslationManager
     /// </summary>
-    private void AssignText()
+    private void SetText()
     {
         _text.text = TranslationManager.Instance.GetText(_key);
+    }
+
+    public void AssignKey(string newKey)
+    {
+        _key = newKey;
+
+        SetText();
     }
 }

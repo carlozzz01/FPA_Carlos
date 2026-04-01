@@ -53,6 +53,10 @@ MonoBehaviour:
   _handle: {fileID: 7137720473230259794}
   <ContextMessage>k__BackingField: {fileID: 11400000, guid: 3694225625ccdee41a4208630965bcd6, type: 2}
   _itemID: ingot
+  _pickupSound:
+    id: 
+    clip: {fileID: 8300000, guid: 68a3c984b637a3d4d9f3f95359f114f0, type: 3}
+    volume: 0.139
 --- !u!114 &7740531678617982125
 MonoBehaviour:
   m_ObjectHideFlags: 0

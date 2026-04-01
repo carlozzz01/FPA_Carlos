@@ -53,7 +53,19 @@ MonoBehaviour:
       description: fuelle arreglado? necesita tener mango de fuelle en inventario
       _isConditionMet: 0
     - id: molten_metal
-      description: fuelle arreglado? necesita tener mango de fuelle en inventario
+      description: metal fundido? necesita tener lingote
+      _isConditionMet: 0
+    - id: opened-door
+      description: se ha pasado el juego?
+      _isConditionMet: 0
+    - id: scroll_mainDoor_opened
+      description: ha leido el primer scroll? el de la puerta?
+      _isConditionMet: 0
+    - id: scroll_bellows_opened
+      description: ha leido la pista del fuelle?
+      _isConditionMet: 0
+    - id: scroll_maze_opened
+      description: ha leido la pista del caldero?
       _isConditionMet: 0
     _gameItems:
     - _id: key_mould

@@ -1,6 +1,8 @@
 <main>
     <lang>
         <string key="test01">Lorem ipsum dolor sit amet.</string>
+        <string key="intro">Hugh... Así que ya ha empezado...</string>
+        <string key="door-locked">Está cerrada con llave.</string>
         <string key="scroll_open_01">A mi hijo,
 Hoy cumples tus [color=#DAA520FF]dieciséis inviernos[/color].
 Como dicta la tradición, hoy debes probar que tienes mano para el oficio.
@@ -19,7 +21,7 @@ solo se esconde entre sus hermanas:
 Mira con atención. Una de ellas no nació para herir,
 sino para dar aliento al fuego.
         </string>
-        <string key="bellows_default">Hmmm... Parece que al fuelle le falta el mango para que funcione.</string>
+        <string key="bellows_default">Le falta el mango.</string>
         <string key="scroll_open_03">Si has llegado hasta aquí, ya sabes que no estás solo.
 Hay un hombre grande rondando estos pasillos. Si te ve, te seguirá. Y si te alcanza, no llegarás más lejos.
 Rincones y sombras serán tus mejores aliados.
@@ -53,8 +55,17 @@ Solo entonces podrás encender lo que falta.
         <string key="E - Get rock">E - Coger piedra</string>
         <string key="E - Open">E - Abrir</string>
         <string key="E - Read">E - Leer</string>
+        <string key="H - Hint">H - Pista</string>
         <string key="resume">Continuar</string>
         <string key="spanish">Español</string>
         <string key="english">Inglés</string>
+        <string key="objectives-key">Q - Objetivos</string>
+        <string key="objective-get-inside">Entra en casa.</string>
+        <string key="objective-fix-bellows">Encuentra el mango del fuelle y arréglalo.</string>
+        <string key="objective-start-fire">Enciende el fuego de la forja.</string>
+        <string key="objective-get-cauldron">Encuentra el caldero.</string>
+        <string key="objective-get-key-mould">Encuentra el molde de llave.</string>
+        <string key="objective-forge-key">Forja una nueva llave de casa.</string>
+        <string key="objective-melt-iron">Funde un lingote de hierro.</string>
     </lang>
 </main>

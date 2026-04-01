@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9210ae4a041d70e4d968ed3f82bf2807, type: 3}
+  m_Name: Play Stun Sound Action
+  m_EditorClassIdentifier: 
+  _sounds:
+  - id: 
+    clip: {fileID: 8300000, guid: 2bae5113cc3fd73488f701c1ff1cdc98, type: 3}
+    volume: 1
+  - id: 
+    clip: {fileID: 8300000, guid: b6a73797f855a6a4d970ba13d9537810, type: 3}
+    volume: 1
